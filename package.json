@@ -7,7 +7,7 @@
     "url": "git+https://github.com/sunnja69/akephalos.git"
   },
   "bin": {
-    "akephalos": "./dist/index.js"
+    "akephalos": "dist/index.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

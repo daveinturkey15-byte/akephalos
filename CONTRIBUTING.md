@@ -9,10 +9,9 @@ Good contributions are small, readable, and easy to test.
 Run:
 
 ```sh
-npm install
+npm ci
 npm run build
 npm test
-npm pack --dry-run
 ```
 
 If your change touches examples or docs, also inspect them for private data.

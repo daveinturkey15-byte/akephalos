@@ -54,10 +54,10 @@ Use that folder for screenshots, docs, and first-time testing. Do not replace it
 Run:
 
 ```sh
-npm install
+npm ci
 npm run build
 npm test
-npm pack --dry-run
+node dist/index.js --help
 ```
 
-Then inspect the package contents and confirm the demo passport is synthetic.
+Then inspect the repository contents and confirm the demo passport is synthetic.

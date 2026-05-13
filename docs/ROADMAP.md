@@ -22,7 +22,7 @@ Akephalos is MVP-stage software. The goal is a small, local-first passport that 
   - local agent runners
 - Improve docs for first-time setup.
 - Keep `akephalos scan` practical and low-noise.
-- Publish a clean `v0.1.0` tag after the public repo is verified.
+- Publish a clean GitHub `v0.1.0` tag after the public repo is verified.
 
 ## Later Ideas
 
@@ -30,7 +30,7 @@ Akephalos is MVP-stage software. The goal is a small, local-first passport that 
 - Better import helpers for known harnesses where safe local patterns exist.
 - Optional migration commands for old ledgers.
 - More MCP resource/tool coverage if it stays local and auditable.
-- Public npm package once package contents are clean.
+- Optional package-manager distribution after GitHub-first usage is proven.
 
 ## Non-Goals
 

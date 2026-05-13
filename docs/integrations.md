@@ -131,11 +131,14 @@ akephalos print tools
 akephalos print memories
 ```
 
-Install Akephalos from npm when published, or build it from this source repo during development:
+For v0.1, use the public GitHub repo or a local clone:
 
 ```sh
-npm install
+git clone https://github.com/sunnja69/akephalos.git
+cd akephalos
+npm ci
 npm run build
+node dist/index.js --help
 ```
 
 Run the weekly digest manually or from a scheduler:

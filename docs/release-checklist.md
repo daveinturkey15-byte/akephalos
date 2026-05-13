@@ -1,10 +1,10 @@
 # Release Checklist
 
-Use this checklist before publishing an MVP release.
+Use this checklist before publishing a GitHub MVP release.
 
 ## Code
 
-- Run `npm install`.
+- Run `npm ci`.
 - Run `npm run build`.
 - Run `npm test`.
 - Run `node dist/index.js --help`.
@@ -35,12 +35,12 @@ Use this checklist before publishing an MVP release.
 - Confirm no command exposes shell execution.
 - Confirm no command reads arbitrary user-provided file paths.
 
-## Package
+## Repository Metadata
 
 - Check `package.json` name, version, license, `bin`, and `files`.
 - Check `package-lock.json` is current.
 - Confirm README quickstart matches the current CLI.
-- Confirm docs are included in the package.
+- Confirm public docs are present in the repository.
 
 ## Non-Goals
 

@@ -842,22 +842,6 @@ function checkGitState(result: DoctorResult, root: string): void {
   }
 }
 
-function checkPackageTarball(result: DoctorResult, root: string): void {
-  const tools = readOptionalTextFile(join(root, "tools.md")) ?? "";
-  const packagePath = join(root, "packages", `akephalos-${version}.tgz`);
-  const packageExpected = directoryExists(root, "packages") || tools.includes(`packages/akephalos-${version}.tgz`);
-
-  if (!packageExpected) {
-    return;
-  }
-
-  if (existsSync(packagePath) && statSync(packagePath).isFile()) {
-    addDoctorPass(result, `packages/akephalos-${version}.tgz exists`);
-  } else {
-    addDoctorWarn(result, `packages/akephalos-${version}.tgz is expected but missing`, "Run npm pack and place the tarball in .akephalos/packages/.");
-  }
-}
-
 function checkMcpDocumentation(result: DoctorResult, root: string): void {
   const tools = readOptionalTextFile(join(root, "tools.md")) ?? "";
 
@@ -986,7 +970,6 @@ function buildDoctorText(): { text: string; hasFailures: boolean } {
     checkConflictMarkers(result, root);
     checkLikelySecrets(result, root);
     checkGitState(result, root);
-    checkPackageTarball(result, root);
     checkMcpDocumentation(result, root);
     checkScheduledSyncDocumentation(result, root);
   }
@@ -2060,7 +2043,6 @@ function safePassportPaths(root: string): string[] {
     "memories.rejected.jsonl",
     "events.rejected.jsonl",
     "exports",
-    "packages",
   ];
 
   return candidates.filter((file) => existsSync(join(root, file)));

@@ -28,11 +28,14 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Install dependencies and build the CLI:
+Clone the public source repo, install development dependencies, and build the CLI:
 
 ```sh
-npm install
+git clone https://github.com/sunnja69/akephalos.git
+cd akephalos
+npm ci
 npm run build
+node dist/index.js --help
 ```
 
 Create a local passport bundle:
@@ -88,7 +91,7 @@ Start the MCP server:
 node dist/index.js mcp
 ```
 
-When installed as a package, the same commands are available as:
+If you add the built CLI to your shell path later, the same commands are available as:
 
 ```sh
 akephalos init
@@ -165,7 +168,7 @@ akephalos status
 akephalos sync-status
 ```
 
-Install Akephalos from npm when published, or build it from this source repo during development.
+For v0.1, use the GitHub source repo or a local clone as the distribution path.
 
 Refresh a private passport later with:
 
@@ -237,7 +240,7 @@ Akephalos v0.1 does not include:
 ## Development
 
 ```sh
-npm install
+npm ci
 npm run build
 npm test
 node dist/index.js --help

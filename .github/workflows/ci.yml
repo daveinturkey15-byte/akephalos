@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-test-pack:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +28,3 @@ jobs:
 
       - name: Test
         run: npm test
-
-      - name: Package dry run
-        run: npm pack --dry-run

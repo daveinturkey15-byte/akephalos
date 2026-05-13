@@ -9,7 +9,7 @@ Use this before sharing Akephalos publicly.
 - [ ] Copy only source, tests, public-safe docs, and package metadata.
 - [ ] Do not copy private `.akephalos` history.
 - [ ] Do not copy private memories or events.
-- [ ] Do not copy package tarballs from private testing.
+- [ ] Do not copy generated archives from private testing.
 - [ ] Do not copy machine-specific paths.
 
 ## Public Repo Contents
@@ -38,13 +38,12 @@ Use this before sharing Akephalos publicly.
 
 ## Validation
 
-- [ ] `npm install`
+- [ ] `npm ci`
 - [ ] `npm run build`
 - [ ] `npm test`
 - [ ] `node dist/index.js --help`
 - [ ] `akephalos scan`
-- [ ] `npm pack --dry-run`
-- [ ] Inspect package contents manually.
+- [ ] Inspect the repository contents manually before sharing.
 
 ## Docs
 
@@ -65,5 +64,5 @@ Use this before sharing Akephalos publicly.
 
 - [ ] Confirm package name and license.
 - [ ] Tag `v0.1.0`.
-- [ ] Optionally publish to npm.
+- [ ] Create a GitHub pre-release from the tag.
 - [ ] Keep the private passport repository private after launch.
