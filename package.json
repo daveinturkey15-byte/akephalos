@@ -1,0 +1,47 @@
+{
+  "name": "akephalos",
+  "version": "0.1.0",
+  "description": "A tiny markdown-first identity and memory passport for AI agents.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnja69/akephalos.git"
+  },
+  "bin": {
+    "akephalos": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w -p tsconfig.json",
+    "test": "npm run build && node --test test/cli.test.js"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "identity",
+    "memory",
+    "markdown"
+  ],
+  "license": "MIT",
+  "type": "commonjs",
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    "README.md",
+    "PROJECT_BRIEF.md",
+    "ARCHITECTURE.md",
+    "MILESTONES.md",
+    "AGENTS.md",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}

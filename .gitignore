@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.tgz
+/.akephalos/
+coverage/
+.env
+.DS_Store
+npm-debug.log*

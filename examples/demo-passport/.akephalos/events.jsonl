@@ -1,0 +1,2 @@
+{"id":"akp_20260101T000000000Z_demo0000","time":"2026-01-01T00:00:00.000Z","source":"demo","type":"init","version":"0.1.0"}
+{"id":"akp_20260101T000300000Z_demo0003","time":"2026-01-01T00:03:00.000Z","source":"demo","type":"harness.check","harness_count":1}

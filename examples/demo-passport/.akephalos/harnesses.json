@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Demo Agent",
+    "status": "configured",
+    "mcp": false,
+    "sync": false,
+    "last_checked": "2026-01-01T00:03:00.000Z",
+    "source": "manual",
+    "notes": [
+      "Fictional harness entry for public demos."
+    ]
+  }
+]
