@@ -1,8 +1,12 @@
 # Akephalos
 
-Akephalos is a tiny open-source, markdown-first identity and memory passport for AI agents.
+Akephalos is a tiny open-source, markdown-first passport for AI agents.
 
-It gives agents a local bundle of durable user and project context without a database, dashboard, hosted account, vector search, OAuth, cloud sync, blockchain, or agent runtime.
+It lets you carry your preferences, tools, rules, projects, harness notes, and durable memories across different AI agents and machines.
+
+Instead of teaching Codex, Cursor, Claude Code, Hermes, Pi IDE, or another agent the same context again and again, you keep a local `.akephalos` bundle that each agent can read before starting work.
+
+Because the bundle is plain Markdown + JSONL, it can be synced through your own private Git repo. Multiple agents on different systems can share the same durable context without a hosted memory service, dashboard, database, cloud account, vector search, OAuth, blockchain, or agent runtime.
 
 ## What It Is
 
