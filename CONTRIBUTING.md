@@ -30,7 +30,7 @@ If your change touches examples or docs, also inspect them for private data.
 
 ## Harness Results
 
-Harness compatibility notes belong in `docs/KNOWN_WORKING_AGENTS.md` when the full harness path has really been verified. For a smaller first check, use the [Agent Harness Smoke Test](docs/AGENT_HARNESS_SMOKE_TEST.md), the [Platform and Agent Smoke-Test Recipes](docs/PLATFORM_AGENT_SMOKE_RECIPES.md), or the copy-paste [Agent Prompt Packs](docs/AGENT_PROMPT_PACKS.md) and submit a compatibility report instead of broadening the matrix too early.
+Harness compatibility notes belong in `docs/KNOWN_WORKING_AGENTS.md` when the full harness path has really been verified. For a smaller first check, use the [Client Status Matrix](docs/CLIENT_STATUS_MATRIX.md) to find an unverified client path, then follow the [Agent Harness Smoke Test](docs/AGENT_HARNESS_SMOKE_TEST.md), the [Platform and Agent Smoke-Test Recipes](docs/PLATFORM_AGENT_SMOKE_RECIPES.md), or the copy-paste [Agent Prompt Packs](docs/AGENT_PROMPT_PACKS.md) and submit a compatibility report instead of broadening the matrix too early.
 
 Use `known-working` only after a real read, memory append, sync, and pull-back check succeeds with a non-sensitive test passport.
 

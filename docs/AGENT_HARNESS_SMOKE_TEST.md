@@ -23,6 +23,7 @@ git clone https://github.com/sunnja69/akephalos.git
 cd akephalos
 npm ci
 npm test
+npm run build
 ```
 
 Create a disposable passport outside any real project:

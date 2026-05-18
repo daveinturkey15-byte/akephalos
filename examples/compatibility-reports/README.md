@@ -14,7 +14,7 @@ A useful report is narrow and factual: one OS, shell, agent, MCP client, or sour
 
 ## Add another report
 
-Good next reports:
+Good next reports, also summarized in the [Client Status Matrix](../../docs/CLIENT_STATUS_MATRIX.md):
 
 - Windows PowerShell source checkout.
 - macOS Terminal source checkout, using the [macOS recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#macos-terminal-source-checkout-smoke-test).

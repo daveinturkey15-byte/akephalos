@@ -48,7 +48,7 @@ Best issue matches:
 - [Test Akephalos with Hermes](https://github.com/sunnja69/akephalos/issues/4)
 - [Test Akephalos with OpenClaw](https://github.com/sunnja69/akephalos/issues/5) — start with the [OpenClaw/Hermes-style harness recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#openclaw-or-hermes-style-harness-smoke-test).
 
-If your client is not listed, open a small compatibility report anyway. Name the exact client/version, use a disposable `.akephalos` passport, redact private paths, and mark the result as `unknown` or `configured` unless you verified resource reads and a fictional memory append.
+If your client is not listed, open a small compatibility report anyway. Name the exact client/version, use a disposable `.akephalos` passport, redact private paths, and mark the result as `unknown` or `configured` unless you verified resource reads and a fictional memory append. To avoid duplicating already-covered paths, check the [Client Status Matrix](CLIENT_STATUS_MATRIX.md) before choosing a report target.
 
 Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
 
