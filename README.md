@@ -32,7 +32,7 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md), the tiny [terminal demo SVG](examples/terminal-demo.svg), or the public-safe [starter passport example](examples/starter-passport/README.md).
+Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md), the tiny [terminal demo SVG](examples/terminal-demo.svg), or the public-safe [starter passport example](examples/starter-passport/README.md). If you are testing MCP clients, start with [MCP Client Config Snippets](docs/MCP_CLIENT_SNIPPETS.md) and submit a conservative compatibility report.
 
 ![Akephalos v0.1 terminal demo](examples/terminal-demo.svg)
 

@@ -37,8 +37,16 @@ Best issue matches:
 
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)
 - [Test Akephalos with Claude Code](https://github.com/sunnja69/akephalos/issues/3)
+- [Test Akephalos as a Cursor MCP server](https://github.com/sunnja69/akephalos/issues/13)
+- [Add a Claude Desktop MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/15)
+- [Test Akephalos with Cline or Roo Code MCP clients](https://github.com/sunnja69/akephalos/issues/16)
+- [Add an opencode MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/17)
 - [Test Akephalos with Hermes](https://github.com/sunnja69/akephalos/issues/4)
 - [Test Akephalos with OpenClaw](https://github.com/sunnja69/akephalos/issues/5)
+
+If your client is not listed, open a small compatibility report anyway. Name the exact client/version, use a disposable `.akephalos` passport, redact private paths, and mark the result as `unknown` or `configured` unless you verified resource reads and a fictional memory append.
+
+Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
 
 ## If you like docs/examples
 

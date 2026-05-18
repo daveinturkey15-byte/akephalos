@@ -61,3 +61,12 @@ node ../akephalos/dist/index.js print memories
 - [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1)
 - [Test Akephalos on Linux](https://github.com/sunnja69/akephalos/issues/2)
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)
+- [Test Akephalos as a Cursor MCP server](https://github.com/sunnja69/akephalos/issues/13)
+- [Add a Codex CLI compatibility smoke report](https://github.com/sunnja69/akephalos/issues/14)
+- [Add a Claude Desktop MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/15)
+- [Test Akephalos with Cline or Roo Code MCP clients](https://github.com/sunnja69/akephalos/issues/16)
+- [Add an opencode MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/17)
+
+For any other MCP client or agent harness, open a fresh compatibility report with the same template instead of editing these docs first. Keep the report narrow, factual, and based on a disposable local checkout.
+
+If you need a copy-paste starting point for MCP config, see [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md). Treat those snippets as unverified setup shapes until someone submits a real smoke report.

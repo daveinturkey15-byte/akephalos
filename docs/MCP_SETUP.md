@@ -53,6 +53,8 @@ For Windows clients, use a Windows path to the checkout, for example:
 }
 ```
 
+For client-specific starting points, see [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md). Those snippets are configuration shapes for smoke tests, not claims that every client is already verified.
+
 ## Resources and tools
 
 The server exposes fixed local passport resources only:
