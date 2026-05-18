@@ -32,7 +32,7 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Clone the public source repo, install development dependencies, and build the CLI:
+Akephalos is in early `v0.1` prerelease. The best way to try it today is from a source checkout:
 
 ```sh
 git clone https://github.com/sunnja69/akephalos.git
@@ -103,6 +103,19 @@ akephalos status
 akephalos scan
 akephalos add-memory "Durable non-secret context."
 ```
+
+## Contributing
+
+Akephalos is deliberately small, so the best contributions are practical field reports and tiny improvements that help another agent/user try the passport safely.
+
+Good first places to help:
+
+- Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke.
+- Test the `.akephalos` bundle with one agent harness such as Claude Code, Codex, Cursor, Hermes/OpenClaw, or another MCP client.
+- Improve examples, screenshots, terminal transcripts, or MCP setup notes using fictional/non-secret data only.
+- Pick an open [`good first issue`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) or [`help wanted`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22) item.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR, especially the safety rules about not committing real memories, secrets, auth paths, or machine-specific private data.
 
 ## Bundle Layout
 

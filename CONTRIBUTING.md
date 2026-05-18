@@ -6,7 +6,10 @@ Good contributions are small, readable, and easy to test.
 
 ## Before Opening A PR
 
-Run:
+1. Start with a small scope: one doc fix, one harness note, one focused test, or one narrow CLI behaviour change.
+2. If you are reporting compatibility, use fictional/non-secret passport data and include your OS, Node version, command transcript, and whether `npm run build` / `npm test` passed.
+3. For docs/examples, prefer copy-pasteable commands and short terminal transcripts over broad claims.
+4. Before opening the PR, run:
 
 ```sh
 npm ci
