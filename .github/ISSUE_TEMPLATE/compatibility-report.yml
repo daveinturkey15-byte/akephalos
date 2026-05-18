@@ -1,0 +1,75 @@
+name: Compatibility report
+
+description: Report a small Akephalos v0.1 trial with a local machine or agent harness.
+title: "Compatibility: <OS / agent / client>"
+labels:
+  - help wanted
+  - testing
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying Akephalos. Please use fictional/non-secret passport data only.
+
+        Do not paste tokens, passwords, private keys, auth paths, private repository URLs, real personal memories, or machine-specific private paths.
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, shell, Node version, and install method.
+      placeholder: "Windows 11 PowerShell, Node 20.x, source checkout"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agent-client
+    attributes:
+      label: Agent/client tested
+      multiple: true
+      options:
+        - Codex
+        - Claude Code
+        - Cursor
+        - Hermes/OpenClaw
+        - MCP client
+        - Plain CLI only
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands run
+      description: Paste a short transcript with private paths and secrets removed.
+      render: shell
+      placeholder: |
+        npm ci
+        npm run build
+        node dist/index.js init
+        node dist/index.js add-memory "Demo user prefers short CLI examples."
+        node dist/index.js status
+        node dist/index.js scan
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks completed
+      options:
+        - label: I used fictional/non-secret passport data.
+          required: true
+        - label: "`npm run build` completed, or I included the error above."
+        - label: "`npm test` completed, or I included the error above."
+        - label: "`akephalos scan` completed, or I included the error above."
+        - label: If I tested an MCP client, I confirmed whether it could read an Akephalos resource.
+
+  - type: textarea
+    id: result
+    attributes:
+      label: Result
+      description: What worked, what broke, and what should be clearer for the next tester?
+    validations:
+      required: true

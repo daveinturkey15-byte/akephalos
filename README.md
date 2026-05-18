@@ -32,7 +32,7 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md).
+Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md).
 
 The best way to try it today is from a source checkout:
 
@@ -97,6 +97,8 @@ Start the MCP server:
 node dist/index.js mcp
 ```
 
+For client config snippets and a safe smoke-test checklist, see [Local MCP Setup Notes](docs/MCP_SETUP.md).
+
 If you add the built CLI to your shell path later, the same commands are available as:
 
 ```sh
@@ -115,6 +117,7 @@ Good first places to help:
 - Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke.
 - Test the `.akephalos` bundle with one agent harness such as Claude Code, Codex, Cursor, Hermes/OpenClaw, or another MCP client.
 - Improve examples, screenshots, terminal transcripts, or MCP setup notes using fictional/non-secret data only.
+- Share a sanitized compatibility report using the GitHub issue template after trying the local CLI or MCP server.
 - Pick an open [`good first issue`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) or [`help wanted`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22) item.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR, especially the safety rules about not committing real memories, secrets, auth paths, or machine-specific private data.
