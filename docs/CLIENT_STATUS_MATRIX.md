@@ -23,7 +23,7 @@ Do not upgrade a status without a report that includes OS, shell, Node version, 
 | Cursor MCP client | `configured` | [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md#cursor--vs-code-mcp-style) and [VS Code MCP Client Notes](VS_CODE_MCP_CLIENT_NOTES.md) | Test Cursor against `node dist/index.js mcp` and report in [issue #13](https://github.com/sunnja69/akephalos/issues/13). |
 | Claude Desktop MCP client | `configured` | [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md#claude-desktop-style) | Test Claude Desktop against `node dist/index.js mcp` and report in [issue #15](https://github.com/sunnja69/akephalos/issues/15). |
 | Cline / Roo Code MCP clients | `configured` | [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md#cursor--vs-code-mcp-style) and [VS Code MCP Client Notes](VS_CODE_MCP_CLIENT_NOTES.md) | Test one VS Code client and report in [issue #16](https://github.com/sunnja69/akephalos/issues/16). |
-| opencode MCP client | `configured` | [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md#opencode-style) | Test opencode and report in [issue #17](https://github.com/sunnja69/akephalos/issues/17). |
+| opencode MCP client | `configured` | [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md#opencode-style) and [opencode MCP Client Notes](OPENCODE_MCP_CLIENT_NOTES.md) | Test opencode and report in [issue #17](https://github.com/sunnja69/akephalos/issues/17). |
 | OpenClaw local harness | `configured` | [OpenClaw/Hermes-style harness recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#openclaw-or-hermes-style-harness-smoke-test) and [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md) | Test in OpenClaw and report in [issue #5](https://github.com/sunnja69/akephalos/issues/5). |
 
 ## Report before claiming support
