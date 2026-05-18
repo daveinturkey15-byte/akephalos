@@ -39,7 +39,7 @@ Try the local `.akephalos` bundle with one agent/client and report exactly what 
 Best issue matches:
 
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)
-- [Test Akephalos with Claude Code](https://github.com/sunnja69/akephalos/issues/3) — start with the [Claude Code/Codex CLI local-file recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test).
+- [Test Akephalos with Claude Code](https://github.com/sunnja69/akephalos/issues/3) — start with the [Claude Code/Codex CLI local-file recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test) or the copy-paste [Agent Prompt Packs](AGENT_PROMPT_PACKS.md).
 - [Add a Codex CLI compatibility smoke report](https://github.com/sunnja69/akephalos/issues/14) — start with the [Claude Code/Codex CLI local-file recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test).
 - [Test Akephalos as a Cursor MCP server](https://github.com/sunnja69/akephalos/issues/13)
 - [Add a Claude Desktop MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/15)
@@ -52,7 +52,7 @@ If your client is not listed, open a small compatibility report anyway. Name the
 
 Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
 
-For Hermes, OpenClaw, Claude Code, Codex, Cursor, or another local coding-agent harness that reads files and runs commands, use the [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md) or the shorter [Platform and Agent Smoke-Test Recipes](PLATFORM_AGENT_SMOKE_RECIPES.md). They keep the claim narrow: local markdown bundle read/update through a disposable source checkout, not full product certification.
+For Hermes, OpenClaw, Claude Code, Codex, Cursor, or another local coding-agent harness that reads files and runs commands, use the [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md), the shorter [Platform and Agent Smoke-Test Recipes](PLATFORM_AGENT_SMOKE_RECIPES.md), or the copy-paste [Agent Prompt Packs](AGENT_PROMPT_PACKS.md). They keep the claim narrow: local markdown bundle read/update through a disposable source checkout, not full product certification.
 
 ## If you like docs/examples
 

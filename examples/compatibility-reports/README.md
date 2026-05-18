@@ -18,7 +18,7 @@ Good next reports:
 
 - Windows PowerShell source checkout.
 - macOS Terminal source checkout, using the [macOS recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#macos-terminal-source-checkout-smoke-test).
-- Claude Code or Codex CLI reading a disposable `.akephalos` folder, using the [local-file agent recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test).
+- Claude Code or Codex CLI reading a disposable `.akephalos` folder, using the [local-file agent recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test) or [Agent Prompt Packs](../../docs/AGENT_PROMPT_PACKS.md).
 - Cursor, Claude Desktop, Cline/Roo Code, or opencode using `node dist/index.js mcp` as a local stdio MCP server.
 - Hermes/OpenClaw reading the markdown bundle and appending a fictional memory. Start with the [Agent Harness Smoke Test](../../docs/AGENT_HARNESS_SMOKE_TEST.md) or the shorter [OpenClaw/Hermes-style recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#openclaw-or-hermes-style-harness-smoke-test) if you want a narrow, public-safe recipe.
 

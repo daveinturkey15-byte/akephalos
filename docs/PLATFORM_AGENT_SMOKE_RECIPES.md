@@ -60,6 +60,8 @@ Issues:
 
 This checks whether a local coding agent can read and update a disposable `.akephalos` folder through normal files and CLI commands. It is not a full sync or product certification.
 
+For copy-paste prompts that make the read-only check, fictional memory append, and tiny before/after task easier to reproduce, see [Agent Prompt Packs](AGENT_PROMPT_PACKS.md).
+
 1. Run the source-checkout steps from the macOS/Linux/Windows recipe for your platform.
 2. Create a disposable bundle in a scratch folder:
 
