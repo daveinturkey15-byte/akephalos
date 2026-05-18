@@ -24,7 +24,7 @@ If the trial gives you a tiny fix or report worth submitting, use the [First PR 
 Best issue matches:
 
 - [Test Akephalos on Windows from a fresh public clone](https://github.com/sunnja69/akephalos/issues/9) — start with the unverified [Windows PowerShell smoke-test recipe](WINDOWS_POWERSHELL_SMOKE_TEST.md).
-- [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1)
+- [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1) — start with the [macOS recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#macos-terminal-source-checkout-smoke-test).
 - [Test Akephalos on Linux](https://github.com/sunnja69/akephalos/issues/2)
 
 ## If you use an agent or MCP client
@@ -39,19 +39,20 @@ Try the local `.akephalos` bundle with one agent/client and report exactly what 
 Best issue matches:
 
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)
-- [Test Akephalos with Claude Code](https://github.com/sunnja69/akephalos/issues/3)
+- [Test Akephalos with Claude Code](https://github.com/sunnja69/akephalos/issues/3) — start with the [Claude Code/Codex CLI local-file recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test).
+- [Add a Codex CLI compatibility smoke report](https://github.com/sunnja69/akephalos/issues/14) — start with the [Claude Code/Codex CLI local-file recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test).
 - [Test Akephalos as a Cursor MCP server](https://github.com/sunnja69/akephalos/issues/13)
 - [Add a Claude Desktop MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/15)
 - [Test Akephalos with Cline or Roo Code MCP clients](https://github.com/sunnja69/akephalos/issues/16)
 - [Add an opencode MCP compatibility smoke report](https://github.com/sunnja69/akephalos/issues/17)
 - [Test Akephalos with Hermes](https://github.com/sunnja69/akephalos/issues/4)
-- [Test Akephalos with OpenClaw](https://github.com/sunnja69/akephalos/issues/5)
+- [Test Akephalos with OpenClaw](https://github.com/sunnja69/akephalos/issues/5) — start with the [OpenClaw/Hermes-style harness recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#openclaw-or-hermes-style-harness-smoke-test).
 
 If your client is not listed, open a small compatibility report anyway. Name the exact client/version, use a disposable `.akephalos` passport, redact private paths, and mark the result as `unknown` or `configured` unless you verified resource reads and a fictional memory append.
 
 Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
 
-For Hermes, OpenClaw, Claude Code, Codex, Cursor, or another local coding-agent harness that reads files and runs commands, use the [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md). It keeps the claim narrow: local markdown bundle read/update through a disposable source checkout, not full product certification.
+For Hermes, OpenClaw, Claude Code, Codex, Cursor, or another local coding-agent harness that reads files and runs commands, use the [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md) or the shorter [Platform and Agent Smoke-Test Recipes](PLATFORM_AGENT_SMOKE_RECIPES.md). They keep the claim narrow: local markdown bundle read/update through a disposable source checkout, not full product certification.
 
 ## If you like docs/examples
 
