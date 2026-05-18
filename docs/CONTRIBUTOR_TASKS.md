@@ -50,7 +50,7 @@ Best issue matches:
 
 If your client is not listed, open a small compatibility report anyway. Name the exact client/version, use a disposable `.akephalos` passport, redact private paths, and mark the result as `unknown` or `configured` unless you verified resource reads and a fictional memory append. To avoid duplicating already-covered paths, check the [Client Status Matrix](CLIENT_STATUS_MATRIX.md) before choosing a report target.
 
-Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
+Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client, then use the [MCP Client Smoke-Test Worksheet](MCP_CLIENT_SMOKE_WORKSHEET.md) to turn the trial into a sanitized compatibility report. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
 
 For Hermes, OpenClaw, Claude Code, Codex, Cursor, or another local coding-agent harness that reads files and runs commands, use the [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md), the shorter [Platform and Agent Smoke-Test Recipes](PLATFORM_AGENT_SMOKE_RECIPES.md), or the copy-paste [Agent Prompt Packs](AGENT_PROMPT_PACKS.md). They keep the claim narrow: local markdown bundle read/update through a disposable source checkout, not full product certification.
 

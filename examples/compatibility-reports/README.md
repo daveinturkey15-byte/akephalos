@@ -19,7 +19,7 @@ Good next reports, also summarized in the [Client Status Matrix](../../docs/CLIE
 - Windows PowerShell source checkout.
 - macOS Terminal source checkout, using the [macOS recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#macos-terminal-source-checkout-smoke-test).
 - Claude Code or Codex CLI reading a disposable `.akephalos` folder, using the [local-file agent recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#claude-code-or-codex-cli-local-file-smoke-test) or [Agent Prompt Packs](../../docs/AGENT_PROMPT_PACKS.md).
-- Cursor, Claude Desktop, Cline/Roo Code, or opencode using `node dist/index.js mcp` as a local stdio MCP server.
+- Cursor, Claude Desktop, Cline/Roo Code, or opencode using `node dist/index.js mcp` as a local stdio MCP server, with the [MCP Client Smoke-Test Worksheet](../../docs/MCP_CLIENT_SMOKE_WORKSHEET.md).
 - Hermes/OpenClaw reading the markdown bundle and appending a fictional memory. Start with the [Agent Harness Smoke Test](../../docs/AGENT_HARNESS_SMOKE_TEST.md) or the shorter [OpenClaw/Hermes-style recipe](../../docs/PLATFORM_AGENT_SMOKE_RECIPES.md#openclaw-or-hermes-style-harness-smoke-test) if you want a narrow, public-safe recipe.
 
 Use [Compatibility Reports](../../docs/COMPATIBILITY_REPORTS.md) for the copy-paste report template and issue links. Mark results conservatively: use `known-working` only after the exact read/append/sync path was verified with disposable data.

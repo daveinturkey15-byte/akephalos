@@ -2,7 +2,7 @@
 
 Akephalos `v0.1` can run as a local MCP stdio server from a source checkout. These snippets are starting points for contributors who want to test Akephalos with real MCP clients.
 
-Status note: snippets on this page are **configuration shapes**, not compatibility claims. Please only mark a client `known-working` after a real smoke test with disposable data.
+Status note: snippets on this page are **configuration shapes**, not compatibility claims. Please only mark a client `known-working` after a real smoke test with disposable data. When you are ready to report a real client run, use the [MCP Client Smoke-Test Worksheet](MCP_CLIENT_SMOKE_WORKSHEET.md).
 
 ## Build the local server first
 
@@ -114,4 +114,4 @@ In the MCP client, try to verify at least one of:
 - call `get_status`
 - call `add_memory` with a fictional memory, then confirm it appears in `memories.jsonl`
 
-When you report results, redact private usernames, hostnames, paths, tokens, private repo names, and real memories. Keep claims to `v0.1` / early MVP: no hosted cloud sync, automatic realtime sync, OAuth, dashboard, vector DB, blockchain, npm package availability, or production maturity.
+When you report results, use the [MCP Client Smoke-Test Worksheet](MCP_CLIENT_SMOKE_WORKSHEET.md), redact private usernames, hostnames, paths, tokens, private repo names, and real memories. Keep claims to `v0.1` / early MVP: no hosted cloud sync, automatic realtime sync, OAuth, dashboard, vector DB, blockchain, npm package availability, or production maturity.
