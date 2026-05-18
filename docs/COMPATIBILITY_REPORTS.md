@@ -51,7 +51,7 @@ node ../akephalos/dist/index.js print memories
 
 ## Where to submit
 
-- If the report is mostly environment compatibility, open a GitHub issue using the compatibility-report template.
+- If the report is mostly environment compatibility, open a GitHub issue using the compatibility-report form. It asks for OS, shell, Node version, commands tried, result, and the same privacy/no-overclaim checks as the template below.
 - If the report improves docs, examples, or setup notes, open a tiny PR and link the relevant issue.
 - If the report proves an agent/harness status, update [Known Working Agents](KNOWN_WORKING_AGENTS.md) conservatively: use `known-working` only after read, memory append, sync, and pull-back are confirmed with non-sensitive data.
 
