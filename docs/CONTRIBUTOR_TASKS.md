@@ -50,6 +50,8 @@ If your client is not listed, open a small compatibility report anyway. Name the
 
 Use [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md) as a starting point for Claude Desktop, Cursor, Cline, Roo Code, opencode, or another stdio MCP client. The snippets are deliberately conservative: they show local source-checkout config shapes without claiming the clients are already known-working.
 
+For Hermes, OpenClaw, Claude Code, Codex, Cursor, or another local coding-agent harness that reads files and runs commands, use the [Agent Harness Smoke Test](AGENT_HARNESS_SMOKE_TEST.md). It keeps the claim narrow: local markdown bundle read/update through a disposable source checkout, not full product certification.
+
 ## If you like docs/examples
 
 Help another adopter see the v0.1 flow before installing anything:
@@ -58,6 +60,7 @@ Help another adopter see the v0.1 flow before installing anything:
 - Improve the public-safe [starter passport example](../examples/starter-passport/README.md) if a first-time adopter gets stuck on the file shape.
 - Add or improve a public-safe compatibility report listed in the [compatibility report examples index](../examples/compatibility-reports/README.md), such as the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 - Add or improve a public-safe MCP report, such as the [WSL MCP stdio smoke test](../examples/compatibility-reports/linux-wsl-mcp-stdio-2026-05-18.md), without claiming external clients are known-working unless you tested them.
+- Add or improve a public-safe agent-harness report, such as the [Hermes-hosted WSL harness smoke test](../examples/compatibility-reports/hermes-wsl-agent-harness-2026-05-18.md), without claiming full harness integration unless you tested it.
 - Add a tiny screenshot set or terminal GIF using disposable data.
 - Keep or improve the existing public-safe [`examples/terminal-demo.svg`](../examples/terminal-demo.svg) if the CLI output changes.
 - Clarify one MCP/client setup note without implying hosted sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.

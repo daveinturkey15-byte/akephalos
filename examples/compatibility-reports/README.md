@@ -10,6 +10,7 @@ A useful report is narrow and factual: one OS, shell, agent, MCP client, or sour
 | --- | --- | --- |
 | [WSL source checkout smoke test](linux-wsl-source-checkout-2026-05-18.md) | Linux under WSL2, Bash, source checkout, CLI quickstart | CLI path passed; external MCP client not tested |
 | [WSL MCP stdio smoke test](linux-wsl-mcp-stdio-2026-05-18.md) | Linux under WSL2, SDK stdio client, MCP resources/tools | MCP stdio basics passed; external UI clients not tested |
+| [Hermes-hosted WSL agent harness smoke test](hermes-wsl-agent-harness-2026-05-18.md) | Hermes Agent cron environment, WSL, local CLI/file harness path | Harness environment could create/read/update a disposable passport; not full Hermes/OpenClaw integration |
 
 ## Add another report
 
@@ -19,7 +20,7 @@ Good next reports:
 - macOS Terminal source checkout.
 - Claude Code reading a disposable `.akephalos` folder.
 - Cursor, Claude Desktop, Cline/Roo Code, or opencode using `node dist/index.js mcp` as a local stdio MCP server.
-- Hermes/OpenClaw reading the markdown bundle and appending a fictional memory.
+- Hermes/OpenClaw reading the markdown bundle and appending a fictional memory. Start with the [Agent Harness Smoke Test](../../docs/AGENT_HARNESS_SMOKE_TEST.md) if you want a narrow, public-safe recipe.
 
 Use [Compatibility Reports](../../docs/COMPATIBILITY_REPORTS.md) for the copy-paste report template and issue links. Mark results conservatively: use `known-working` only after the exact read/append/sync path was verified with disposable data.
 
