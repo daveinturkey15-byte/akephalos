@@ -32,7 +32,9 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Akephalos is in early `v0.1` prerelease. The best way to try it today is from a source checkout:
+Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md).
+
+The best way to try it today is from a source checkout:
 
 ```sh
 git clone https://github.com/sunnja69/akephalos.git
