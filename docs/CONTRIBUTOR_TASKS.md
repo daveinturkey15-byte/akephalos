@@ -16,7 +16,7 @@ Use fictional or disposable passport data only. Do not paste real memories, toke
    ```
 
 2. Run the disposable quickstart in [Try Akephalos in 5 Minutes](TRY_IN_5_MINUTES.md).
-3. Open a compatibility report with your OS, shell, Node version, and sanitized command output.
+3. Open a compatibility report with your OS, shell, Node version, and sanitized command output. The [Compatibility Reports](COMPATIBILITY_REPORTS.md) page has a copy-pasteable template.
 
 Best issue matches:
 
@@ -45,6 +45,7 @@ Best issue matches:
 Help another adopter see the v0.1 flow before installing anything:
 
 - Improve the fictional [demo transcript](../examples/demo-transcript.md).
+- Add or improve a public-safe compatibility report like the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 - Add a tiny screenshot set or terminal GIF using disposable data.
 - Clarify one MCP/client setup note without implying hosted sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
 

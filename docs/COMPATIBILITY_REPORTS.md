@@ -1,0 +1,63 @@
+# Compatibility Reports
+
+Akephalos v0.1 needs small, factual field reports more than broad integration claims. Use this page to turn a quick local trial into something maintainers and new adopters can verify.
+
+Use fictional or disposable passport data only. Do not paste real memories, tokens, auth paths, private repository names, hostnames, local usernames, or machine-specific private paths.
+
+## Quick report template
+
+````md
+## Environment
+
+- OS:
+- Shell:
+- Node version:
+- Install method: source checkout from https://github.com/sunnja69/akephalos
+- Akephalos version or commit:
+- Agent/client tested, if any:
+
+## Commands tried
+
+```sh
+git clone https://github.com/sunnja69/akephalos.git
+cd akephalos
+npm ci
+npm test
+node dist/index.js --help
+mkdir ../akephalos-demo
+cd ../akephalos-demo
+node ../akephalos/dist/index.js init
+node ../akephalos/dist/index.js add-memory "Demo user prefers local-first markdown tools."
+node ../akephalos/dist/index.js import-harness "Demo Agent" --tool "terminal" --tool "git" --preference "Use disposable data."
+node ../akephalos/dist/index.js status
+node ../akephalos/dist/index.js scan
+node ../akephalos/dist/index.js print memories
+```
+
+## Result
+
+- Build/test result:
+- CLI quickstart result:
+- MCP result, if tested:
+- `scan` result:
+- Any confusing docs or errors:
+
+## Safety check
+
+- [ ] Uses only fictional/demo memories.
+- [ ] Removes private paths, hostnames, usernames, auth config, tokens, and private repo names.
+- [ ] Does not imply hosted cloud sync, realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
+````
+
+## Where to submit
+
+- If the report is mostly environment compatibility, open a GitHub issue using the compatibility-report template.
+- If the report improves docs, examples, or setup notes, open a tiny PR and link the relevant issue.
+- If the report proves an agent/harness status, update [Known Working Agents](KNOWN_WORKING_AGENTS.md) conservatively: use `known-working` only after read, memory append, sync, and pull-back are confirmed with non-sensitive data.
+
+## Good first report targets
+
+- [Test Akephalos on Windows from a fresh public clone](https://github.com/sunnja69/akephalos/issues/9)
+- [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1)
+- [Test Akephalos on Linux](https://github.com/sunnja69/akephalos/issues/2)
+- [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)

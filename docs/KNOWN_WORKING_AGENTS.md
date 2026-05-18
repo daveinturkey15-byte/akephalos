@@ -6,9 +6,9 @@ Keep updates small and factual. Do not add secrets, local auth paths, or private
 
 | Agent/harness | OS | Install method | MCP support | Sync support | Status | Caveats |
 | --- | --- | --- | --- | --- | --- | --- |
-| Codex | Windows | Local CLI from source/package | Yes | Yes | known-working | Reads the local bundle and can use Git sync through `.akephalos`. |
-| Cursor | Windows | Local CLI from source/package | Yes | Yes | known-working | Cursor may need its MCP config reloaded before it sees resources. |
-| Pi IDE | Pi/Linux | Local CLI from source/package | Not confirmed | Yes | known-working | Scheduled sync has been tested at a 15-minute interval with a private passport. |
+| Codex | Windows | Local CLI from source checkout or local build | Yes | Yes | known-working | Reads the local bundle and can use Git sync through `.akephalos`. |
+| Cursor | Windows | Local CLI from source checkout or local build | Yes | Yes | known-working | Cursor may need its MCP config reloaded before it sees resources. |
+| Pi IDE | Pi/Linux | Local CLI from source checkout or local build | Not confirmed | Yes | known-working | Scheduled sync has been tested at a 15-minute interval with a private passport. |
 | Hermes | TBD | Manual CLI setup; see [Hermes integration](integrations/hermes.md) | TBD | TBD | unknown | Next harness test. Keep status below `known-working` until read, memory append, sync, and pull-back are confirmed. |
 | Claude Code | TBD | TBD | TBD | TBD | unknown | Not tested yet. |
 | OpenClaw | TBD | TBD | TBD | TBD | unknown | Not tested yet. |
@@ -34,6 +34,8 @@ akephalos sync-status
 ```
 
 Use `known-working` only after the harness has completed a full read, memory append, sync, and pull-back check.
+
+For OS/client smoke tests that do not prove the full harness workflow, add a compatibility report instead. See [Compatibility Reports](COMPATIBILITY_REPORTS.md) and the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 
 Valid statuses are:
 
