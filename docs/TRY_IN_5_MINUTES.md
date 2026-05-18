@@ -24,7 +24,7 @@ node ../akephalos/dist/index.js init
 
 Akephalos creates a local `.akephalos` folder with markdown/plain-file state.
 
-If you want to preview the happy path before running it, see the fictional, public-safe [terminal demo SVG](../examples/terminal-demo.svg) or [demo transcript](../examples/demo-transcript.md).
+If you want to preview the happy path before running it, see the fictional, public-safe [terminal demo SVG](../examples/terminal-demo.svg), [demo transcript](../examples/demo-transcript.md), or [starter passport example](../examples/starter-passport/README.md).
 
 ## 3. Add fictional, non-secret context
 

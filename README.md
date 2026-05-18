@@ -32,7 +32,7 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md) or the tiny [terminal demo SVG](examples/terminal-demo.svg).
+Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md), the tiny [terminal demo SVG](examples/terminal-demo.svg), or the public-safe [starter passport example](examples/starter-passport/README.md).
 
 ![Akephalos v0.1 terminal demo](examples/terminal-demo.svg)
 
@@ -118,7 +118,7 @@ Good first places to help:
 
 - Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke.
 - Test the `.akephalos` bundle with one agent harness such as Claude Code, Codex, Cursor, Hermes/OpenClaw, or another MCP client.
-- Improve examples, screenshots, terminal transcripts, or MCP setup notes using fictional/non-secret data only.
+- Improve examples, screenshots, terminal transcripts, starter passport files, or MCP setup notes using fictional/non-secret data only.
 - Share a sanitized compatibility report using the GitHub issue template after trying the local CLI or MCP server.
 - Use the [Compatibility Reports](docs/COMPATIBILITY_REPORTS.md) template if you want a copy-pasteable report format, or skim the [WSL source-checkout smoke test](examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md) for a public-safe example.
 - Pick an open [`good first issue`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) or [`help wanted`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22) item.
@@ -281,3 +281,4 @@ For contributors and testers:
 - [docs/CONTRIBUTING_NOTES.md](docs/CONTRIBUTING_NOTES.md)
 - [docs/KNOWN_WORKING_AGENTS.md](docs/KNOWN_WORKING_AGENTS.md)
 - [examples/demo-passport](examples/demo-passport)
+- [examples/starter-passport](examples/starter-passport/README.md)

@@ -45,6 +45,7 @@ Best issue matches:
 Help another adopter see the v0.1 flow before installing anything:
 
 - Improve the fictional [demo transcript](../examples/demo-transcript.md).
+- Improve the public-safe [starter passport example](../examples/starter-passport/README.md) if a first-time adopter gets stuck on the file shape.
 - Add or improve a public-safe compatibility report like the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 - Add a tiny screenshot set or terminal GIF using disposable data.
 - Keep or improve the existing public-safe [`examples/terminal-demo.svg`](../examples/terminal-demo.svg) if the CLI output changes.
