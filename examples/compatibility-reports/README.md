@@ -9,6 +9,7 @@ A useful report is narrow and factual: one OS, shell, agent, MCP client, or sour
 | Report | Scope | Status |
 | --- | --- | --- |
 | [WSL source checkout smoke test](linux-wsl-source-checkout-2026-05-18.md) | Linux under WSL2, Bash, source checkout, CLI quickstart | CLI path passed; external MCP client not tested |
+| [WSL MCP stdio smoke test](linux-wsl-mcp-stdio-2026-05-18.md) | Linux under WSL2, SDK stdio client, MCP resources/tools | MCP stdio basics passed; external UI clients not tested |
 
 ## Add another report
 

@@ -125,7 +125,7 @@ Good first places to help:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR, especially the safety rules about not committing real memories, secrets, auth paths, or machine-specific private data.
 
-Not sure where to start? Use the [Contributor Task Picker](docs/CONTRIBUTOR_TASKS.md) to choose a 5-minute OS check, agent/MCP compatibility report, or docs/example improvement.
+Not sure where to start? Use the [Contributor Task Picker](docs/CONTRIBUTOR_TASKS.md) to choose a 5-minute OS check, agent/MCP compatibility report, or docs/example improvement. If you are ready to open a tiny PR, use the [First PR Guide](docs/FIRST_PR_GUIDE.md).
 
 ## Bundle Layout
 
