@@ -32,7 +32,7 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md), the tiny [terminal demo SVG](examples/terminal-demo.svg), or the public-safe [starter passport example](examples/starter-passport/README.md). If you are testing MCP clients, start with [MCP Client Config Snippets](docs/MCP_CLIENT_SNIPPETS.md) and submit a conservative compatibility report.
+Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If you are deciding whether the MVP fits your use case, skim the [Adopter FAQ](docs/ADOPTER_FAQ.md) first. If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md), the tiny [terminal demo SVG](examples/terminal-demo.svg), or the public-safe [starter passport example](examples/starter-passport/README.md). If you are testing MCP clients, start with [MCP Client Config Snippets](docs/MCP_CLIENT_SNIPPETS.md) and submit a conservative compatibility report.
 
 ![Akephalos v0.1 terminal demo](examples/terminal-demo.svg)
 
@@ -116,7 +116,7 @@ Akephalos is deliberately small, so the best contributions are practical field r
 
 Good first places to help:
 
-- Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke. Windows testers can start with the unverified [PowerShell smoke-test recipe](docs/WINDOWS_POWERSHELL_SMOKE_TEST.md).
+- Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke. Windows testers can start with the unverified [PowerShell smoke-test recipe](docs/WINDOWS_POWERSHELL_SMOKE_TEST.md). If you are not sure what Akephalos can and cannot safely claim yet, read the [Adopter FAQ](docs/ADOPTER_FAQ.md) before filing a report.
 - Test the `.akephalos` bundle with one agent harness such as Claude Code, Codex, Cursor, Hermes/OpenClaw, or another MCP client. For a conservative harness check, use the [Agent Harness Smoke Test](docs/AGENT_HARNESS_SMOKE_TEST.md).
 - Improve examples, screenshots, terminal transcripts, starter passport files, or MCP setup notes using fictional/non-secret data only.
 - Share a sanitized compatibility report using the GitHub issue template after trying the local CLI or MCP server.

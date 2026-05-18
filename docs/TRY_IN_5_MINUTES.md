@@ -1,6 +1,6 @@
 # Try Akephalos in 5 Minutes
 
-Akephalos `v0.1` is an early prerelease. This walkthrough uses a local source checkout and a disposable passport so you can see the shape of the tool without publishing personal data.
+Akephalos `v0.1` is an early prerelease. This walkthrough uses a local source checkout and a disposable passport so you can see the shape of the tool without publishing personal data. If you are still deciding whether Akephalos is the right shape for your workflow, skim the [Adopter FAQ](ADOPTER_FAQ.md) first.
 
 ## 1. Clone and build
 

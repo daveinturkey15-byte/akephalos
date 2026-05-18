@@ -16,7 +16,8 @@ Use fictional or disposable passport data only. Do not paste real memories, toke
    ```
 
 2. Run the disposable quickstart in [Try Akephalos in 5 Minutes](TRY_IN_5_MINUTES.md).
-3. Open a compatibility report with your OS, shell, Node version, and sanitized command output. The [Compatibility Reports](COMPATIBILITY_REPORTS.md) page has a copy-pasteable template.
+3. If you are unsure what the early MVP can safely claim, skim the [Adopter FAQ](ADOPTER_FAQ.md).
+4. Open a compatibility report with your OS, shell, Node version, and sanitized command output. The [Compatibility Reports](COMPATIBILITY_REPORTS.md) page has a copy-pasteable template.
 
 If the trial gives you a tiny fix or report worth submitting, use the [First PR Guide](FIRST_PR_GUIDE.md) before opening a pull request.
 
