@@ -20,7 +20,7 @@ Use fictional or disposable passport data only. Do not paste real memories, toke
 
 Best issue matches:
 
-- [Test Akephalos on Windows from a fresh public clone](https://github.com/sunnja69/akephalos/issues/9)
+- [Test Akephalos on Windows from a fresh public clone](https://github.com/sunnja69/akephalos/issues/9) — start with the unverified [Windows PowerShell smoke-test recipe](WINDOWS_POWERSHELL_SMOKE_TEST.md).
 - [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1)
 - [Test Akephalos on Linux](https://github.com/sunnja69/akephalos/issues/2)
 
@@ -54,7 +54,7 @@ Help another adopter see the v0.1 flow before installing anything:
 
 - Improve the fictional [demo transcript](../examples/demo-transcript.md).
 - Improve the public-safe [starter passport example](../examples/starter-passport/README.md) if a first-time adopter gets stuck on the file shape.
-- Add or improve a public-safe compatibility report like the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
+- Add or improve a public-safe compatibility report listed in the [compatibility report examples index](../examples/compatibility-reports/README.md), such as the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 - Add a tiny screenshot set or terminal GIF using disposable data.
 - Keep or improve the existing public-safe [`examples/terminal-demo.svg`](../examples/terminal-demo.svg) if the CLI output changes.
 - Clarify one MCP/client setup note without implying hosted sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.

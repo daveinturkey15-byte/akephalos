@@ -116,11 +116,11 @@ Akephalos is deliberately small, so the best contributions are practical field r
 
 Good first places to help:
 
-- Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke.
+- Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke. Windows testers can start with the unverified [PowerShell smoke-test recipe](docs/WINDOWS_POWERSHELL_SMOKE_TEST.md).
 - Test the `.akephalos` bundle with one agent harness such as Claude Code, Codex, Cursor, Hermes/OpenClaw, or another MCP client.
 - Improve examples, screenshots, terminal transcripts, starter passport files, or MCP setup notes using fictional/non-secret data only.
 - Share a sanitized compatibility report using the GitHub issue template after trying the local CLI or MCP server.
-- Use the [Compatibility Reports](docs/COMPATIBILITY_REPORTS.md) template if you want a copy-pasteable report format, or skim the [WSL source-checkout smoke test](examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md) for a public-safe example.
+- Use the [Compatibility Reports](docs/COMPATIBILITY_REPORTS.md) template if you want a copy-pasteable report format, or skim the [compatibility report examples](examples/compatibility-reports/README.md) for public-safe report shapes.
 - Pick an open [`good first issue`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) or [`help wanted`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22) item.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR, especially the safety rules about not committing real memories, secrets, auth paths, or machine-specific private data.

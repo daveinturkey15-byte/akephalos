@@ -1,0 +1,60 @@
+name: Docs or example improvement
+description: Suggest a small docs/example fix that helps first-time Akephalos v0.1 adopters.
+title: "Docs/example: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for improving Akephalos v0.1 docs/examples. Keep reports factual and use fictional or disposable `.akephalos` data only.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Quickstart / install-from-source
+        - Compatibility report example
+        - MCP setup notes
+        - Starter passport example
+        - Terminal transcript / screenshot / demo asset
+        - Contributor guide
+        - Other docs/example
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What was confusing or missing?
+      description: Describe the smallest adopter/contributor problem this would fix.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-change
+    attributes:
+      label: Proposed tiny change
+      description: Paste the exact wording, command, screenshot idea, or file path if you have it.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: What did you run or inspect? If untested, say so explicitly.
+      placeholder: |
+        - OS/shell:
+        - Commands checked:
+        - Docs/examples inspected:
+        - Untested pieces:
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety checks
+      options:
+        - label: I used only fictional/disposable data, not real memories or private project context.
+          required: true
+        - label: I removed private paths, usernames, hostnames, auth config, tokens, private repository names, and secrets.
+          required: true
+        - label: I am not implying hosted sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
+          required: true

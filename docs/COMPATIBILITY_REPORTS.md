@@ -57,7 +57,7 @@ node ../akephalos/dist/index.js print memories
 
 ## Good first report targets
 
-- [Test Akephalos on Windows from a fresh public clone](https://github.com/sunnja69/akephalos/issues/9)
+- [Test Akephalos on Windows from a fresh public clone](https://github.com/sunnja69/akephalos/issues/9) — use the unverified [Windows PowerShell smoke-test recipe](WINDOWS_POWERSHELL_SMOKE_TEST.md) as a starting point.
 - [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1)
 - [Test Akephalos on Linux](https://github.com/sunnja69/akephalos/issues/2)
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)
@@ -69,4 +69,4 @@ node ../akephalos/dist/index.js print memories
 
 For any other MCP client or agent harness, open a fresh compatibility report with the same template instead of editing these docs first. Keep the report narrow, factual, and based on a disposable local checkout.
 
-If you need a copy-paste starting point for MCP config, see [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md). Treat those snippets as unverified setup shapes until someone submits a real smoke report.
+For examples of public-safe report wording, see the [compatibility report examples index](../examples/compatibility-reports/README.md). If you need a copy-paste starting point for MCP config, see [MCP Client Config Snippets](MCP_CLIENT_SNIPPETS.md). Treat those snippets as unverified setup shapes until someone submits a real smoke report.
