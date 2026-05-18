@@ -4,6 +4,8 @@ Akephalos is a small, local-first, markdown-first identity and memory passport f
 
 Good contributions are small, readable, and easy to test.
 
+If you are choosing your first task, start with the [Contributor Task Picker](docs/CONTRIBUTOR_TASKS.md). It maps 5-minute source-checkout checks, agent/MCP reports, and docs/example improvements to open `good first issue` / `help wanted` items.
+
 ## Before Opening A PR
 
 1. Start with a small scope: one doc fix, one harness note, one focused test, or one narrow CLI behaviour change.
