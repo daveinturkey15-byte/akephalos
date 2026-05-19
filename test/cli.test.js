@@ -296,6 +296,42 @@ test("status counts memories", () => {
   assert.match(result.stdout, /Memory count: 3/);
 });
 
+test("status --json reports machine-readable bundle state", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  runCli(cwd, ["add-memory", "one"]);
+  runCli(cwd, ["add-memory", "two"]);
+
+  const result = runCli(cwd, ["status", "--json"]);
+  const status = JSON.parse(result.stdout);
+
+  assert.equal(status.ok, true);
+  assert.equal(status.bundle.exists, true);
+  assert.equal(status.bundle.manifestVersion, "1");
+  assert.equal(status.memoryCount, 2);
+  assert.equal(status.files.length, 9);
+  assert.deepEqual(
+    status.files.map((file) => file.state),
+    Array(9).fill("ok"),
+  );
+  assert.deepEqual(status.warnings, []);
+});
+
+test("status --json reports a missing bundle without prose", () => {
+  const cwd = tempWorkspace();
+
+  const result = runCli(cwd, ["status", "--json"]);
+  const status = JSON.parse(result.stdout);
+
+  assert.equal(status.ok, false);
+  assert.equal(status.bundle.exists, false);
+  assert.equal(status.bundle.manifestVersion, null);
+  assert.equal(status.memoryCount, 0);
+  assert.deepEqual(status.files, []);
+  assert.doesNotMatch(result.stdout, /Run `akephalos init`/);
+});
+
 test("doctor reports healthy bundle checks", () => {
   const cwd = tempWorkspace();
 

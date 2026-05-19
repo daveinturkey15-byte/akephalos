@@ -29,7 +29,7 @@ Usage:
 
 Commands:
   init                         Create a .akephalos passport bundle
-  status                       Show bundle status and memory count
+  status [--json]              Show bundle status and memory count
   doctor [--json]              Run a non-destructive passport health check
   scan                         Scan the passport for likely secrets and privacy leaks
   merge-ledgers                Resolve JSONL ledger conflict markers safely
@@ -83,6 +83,23 @@ type InitResult = {
 
 type JsonlParseResult = {
   entries: unknown[];
+  warnings: string[];
+};
+
+type StatusFileCheck = {
+  path: string;
+  state: "ok" | "missing" | "not directory" | "not file";
+};
+
+type StatusResult = {
+  ok: boolean;
+  bundle: {
+    path: string;
+    exists: boolean;
+    manifestVersion: string | null;
+  };
+  files: StatusFileCheck[];
+  memoryCount: number;
   warnings: string[];
 };
 
@@ -596,34 +613,81 @@ function formatStatusLine(root: string, entry: (typeof statusEntries)[number]): 
   return statSync(path).isFile() ? `  [ok] ${entry}` : `  [not file] ${entry}`;
 }
 
-function buildStatusText(): { text: string; warnings: string[] } {
+function getStatusFileCheck(root: string, entry: (typeof statusEntries)[number]): StatusFileCheck {
+  const path = join(root, entry);
+
+  if (!existsSync(path)) {
+    return { path: entry, state: "missing" };
+  }
+
+  if (entry.endsWith("/")) {
+    return { path: entry, state: statSync(path).isDirectory() ? "ok" : "not directory" };
+  }
+
+  return { path: entry, state: statSync(path).isFile() ? "ok" : "not file" };
+}
+
+function buildStatusResult(): StatusResult {
   const root = bundleRoot();
   const exists = existsSync(root) && statSync(root).isDirectory();
-  const lines = ["Akephalos status", ""];
-
-  lines.push(`Bundle: ${exists ? `found at ${root}` : "missing"}`);
 
   if (!exists) {
-    lines.push("Run `akephalos init` to create a bundle.");
     return {
-      text: `${lines.join("\n")}\n`,
+      ok: false,
+      bundle: {
+        path: root,
+        exists: false,
+        manifestVersion: null,
+      },
+      files: [],
+      memoryCount: 0,
       warnings: [],
     };
   }
 
-  lines.push(`Manifest version: ${readManifestVersion(root)}`);
+  const files = statusEntries.map((entry) => getStatusFileCheck(root, entry));
+  const memories = parseJsonlQuiet(join(root, "memories.jsonl"));
+  const allFilesOk = files.every((file) => file.state === "ok");
+
+  return {
+    ok: allFilesOk && memories.warnings.length === 0,
+    bundle: {
+      path: root,
+      exists: true,
+      manifestVersion: readManifestVersion(root),
+    },
+    files,
+    memoryCount: memories.entries.length,
+    warnings: memories.warnings,
+  };
+}
+
+function buildStatusText(): { text: string; warnings: string[] } {
+  const status = buildStatusResult();
+  const lines = ["Akephalos status", ""];
+
+  lines.push(`Bundle: ${status.bundle.exists ? `found at ${status.bundle.path}` : "missing"}`);
+
+  if (!status.bundle.exists) {
+    lines.push("Run `akephalos init` to create a bundle.");
+    return {
+      text: `${lines.join("\n")}\n`,
+      warnings: status.warnings,
+    };
+  }
+
+  lines.push(`Manifest version: ${status.bundle.manifestVersion}`);
   lines.push("Files:");
 
   for (const entry of statusEntries) {
-    lines.push(formatStatusLine(root, entry));
+    lines.push(formatStatusLine(status.bundle.path, entry));
   }
 
-  const memories = parseJsonlQuiet(join(root, "memories.jsonl"));
-  lines.push(`Memory count: ${memories.entries.length}`);
+  lines.push(`Memory count: ${status.memoryCount}`);
 
   return {
     text: `${lines.join("\n")}\n`,
-    warnings: memories.warnings,
+    warnings: status.warnings,
   };
 }
 
@@ -632,6 +696,10 @@ function printStatus(): void {
 
   process.stdout.write(status.text);
   printWarnings(status.warnings);
+}
+
+function printStatusJson(): void {
+  process.stdout.write(`${JSON.stringify(buildStatusResult(), null, 2)}\n`);
 }
 
 function addDoctorPass(result: DoctorResult, message: string): void {
@@ -3526,13 +3594,17 @@ function main(args: string[]): void {
   }
 
   if (command === "status") {
-    if (rest.length > 0) {
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== "--json")) {
       process.stderr.write(`Unknown option for status: ${rest[0]}\n`);
       process.exitCode = 1;
       return;
     }
 
-    printStatus();
+    if (rest[0] === "--json") {
+      printStatusJson();
+    } else {
+      printStatus();
+    }
     return;
   }
 

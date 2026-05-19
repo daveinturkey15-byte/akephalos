@@ -52,6 +52,7 @@ Inspect the bundle:
 
 ```sh
 node dist/index.js status
+node dist/index.js status --json
 node dist/index.js doctor
 node dist/index.js doctor --json
 node dist/index.js scan
@@ -60,6 +61,8 @@ node dist/index.js print rules
 node dist/index.js print projects
 node dist/index.js print memories
 ```
+
+`status --json` reports bundle presence, manifest version, required-file states, memory count, and JSONL warnings for automation that only needs a quick readiness check.
 
 `doctor --json` is for agent harnesses, CI jobs, and scripts that need a stable machine-readable pass/warn/fail summary without scraping prose.
 
