@@ -3,6 +3,7 @@ name: Compatibility report
 description: Report a source-checkout, OS, agent, or MCP client smoke test using disposable data.
 title: "Compatibility report: "
 labels:
+  - good first issue
   - help wanted
   - testing
 body:

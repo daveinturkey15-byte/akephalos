@@ -17,7 +17,7 @@ If you are unsure, open a compatibility report issue first. A real smoke test is
 Use the repository templates when they fit:
 
 - [Compatibility report issue form](https://github.com/sunnja69/akephalos/issues/new?template=compatibility-report.yml) for OS, source-checkout, agent, or MCP client smoke tests.
-- [Docs/example issue form](https://github.com/sunnja69/akephalos/issues/new?template=docs-example.yml) for small wording, transcript, screenshot, or starter-passport improvements.
+- [Docs/example issue form](https://github.com/sunnja69/akephalos/issues/new?template=docs-example-improvement.yml) for small wording, transcript, screenshot, or starter-passport improvements.
 - The PR template is intentionally short; fill in what changed, why it helps v0.1 adopters, and how you verified it.
 
 ## Safe source-checkout setup
