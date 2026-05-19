@@ -258,3 +258,4 @@ For contributors and testers:
 - [docs/CONTRIBUTING_NOTES.md](docs/CONTRIBUTING_NOTES.md)
 - [docs/KNOWN_WORKING_AGENTS.md](docs/KNOWN_WORKING_AGENTS.md)
 - [examples/demo-passport](examples/demo-passport)
+- [examples/quickstart-terminal-transcript.md](examples/quickstart-terminal-transcript.md)
