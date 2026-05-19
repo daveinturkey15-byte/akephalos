@@ -36,6 +36,14 @@ Try the local `.akephalos` bundle with one agent/client and report exactly what 
 - Did MCP resources/tools appear if you configured `node dist/index.js mcp`?
 - Did `scan` stay clean before sharing anything public?
 
+Fastest open report paths right now:
+
+1. Codex CLI local-file report: use [Codex CLI Compatibility Notes](CODEX_CLI_COMPATIBILITY_NOTES.md), then paste the skeleton into [issue #14](https://github.com/sunnja69/akephalos/issues/14).
+2. Cline/Roo MCP report: use [Cline/Roo MCP Client Notes](CLINE_ROO_MCP_CLIENT_NOTES.md), then report in [issue #16](https://github.com/sunnja69/akephalos/issues/16).
+3. opencode MCP report: use [opencode MCP Client Notes](OPENCODE_MCP_CLIENT_NOTES.md), then report in [issue #17](https://github.com/sunnja69/akephalos/issues/17).
+
+One small verified report is better than a broad “works with everything” claim.
+
 Best issue matches:
 
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)

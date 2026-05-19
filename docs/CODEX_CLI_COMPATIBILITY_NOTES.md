@@ -74,3 +74,39 @@ Post a sanitized report in [issue #14](https://github.com/sunnja69/akephalos/iss
 - any sandbox, working-directory, permission, or path issues
 
 Do not paste real memories, tokens, auth config, private repo names, hostnames, local usernames, screenshots with accounts/chats, or machine-specific private paths. Mark the result `configured` until a real Codex CLI run verifies the read/update path. Do not imply hosted sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, npm package availability, or production maturity.
+
+## Copy-paste report skeleton
+
+```md
+## Codex CLI compatibility smoke report
+
+- Status: configured / known-working / blocked
+- Date tested:
+- Akephalos commit tested:
+- OS and shell/terminal:
+- Node/npm versions:
+- Codex CLI version or commit, if visible:
+- Workspace shape: disposable local folder / other (describe without private paths)
+
+### What I asked Codex CLI to do
+
+Paste or summarize the prompt, with account names, private paths, project names, tokens, and real memories removed.
+
+### What worked
+
+- [ ] Codex CLI read `.akephalos/akephalos.md`
+- [ ] Codex CLI read `.akephalos/rules.md`
+- [ ] Codex CLI read `.akephalos/tools.md`
+- [ ] Codex CLI read `.akephalos/projects.md`
+- [ ] Codex CLI read `.akephalos/memories.jsonl`
+- [ ] `node ../akephalos/dist/index.js add-memory "Fictional Codex CLI smoke test memory."` worked
+- [ ] `node ../akephalos/dist/index.js scan` passed after the update
+
+### Friction or blockers
+
+Note any sandbox, working-directory, permission, path, quoting, or CLI-invocation issue. Keep local paths redacted, for example `/home/<user>/...` or `C:\\Users\\<user>\\...`.
+
+### Claim boundary
+
+This report covers only Akephalos v0.1 / early MVP from a source checkout with a disposable local `.akephalos` passport. It does not claim npm package availability, hosted sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, or production maturity.
+```
