@@ -71,7 +71,7 @@ Help another adopter see the v0.1 flow before installing anything:
 - Add or improve a public-safe compatibility report listed in the [compatibility report examples index](../examples/compatibility-reports/README.md), such as the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 - Add or improve a public-safe MCP report, such as the [WSL MCP stdio smoke test](../examples/compatibility-reports/linux-wsl-mcp-stdio-2026-05-18.md), without claiming external clients are known-working unless you tested them.
 - Add or improve a public-safe agent-harness report, such as the [Hermes-hosted WSL harness smoke test](../examples/compatibility-reports/hermes-wsl-agent-harness-2026-05-18.md), without claiming full harness integration unless you tested it.
-- Add a tiny screenshot set or terminal GIF using disposable data.
+- Add a tiny screenshot set or terminal GIF using disposable data; use the [Screenshot and Demo Capture Guide](SCREENSHOT_AND_DEMO_CAPTURE.md) to avoid leaking private paths, account names, or real memories.
 - Keep or improve the existing public-safe [`examples/terminal-demo.svg`](../examples/terminal-demo.svg) if the CLI output changes.
 - Clarify one MCP/client setup note without implying hosted sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
 

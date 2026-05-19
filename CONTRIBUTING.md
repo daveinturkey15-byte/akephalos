@@ -19,7 +19,7 @@ npm run build
 npm test
 ```
 
-If your change touches examples or docs, also inspect them for private data.
+If your change touches examples, docs, screenshots, GIFs, or transcripts, also inspect them for private data. For visual demos, use the [Screenshot and Demo Capture Guide](docs/SCREENSHOT_AND_DEMO_CAPTURE.md).
 
 ## Safety Rules
 
