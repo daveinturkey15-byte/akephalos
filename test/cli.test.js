@@ -396,7 +396,7 @@ test("scan detects likely secrets without printing values", () => {
   const cwd = tempWorkspace();
 
   runCli(cwd, ["init"]);
-  writeFileSync(join(cwd, ".akephalos", "rules.md"), "OPENAI_API_KEY=sk-proj-abcdefghijklmnopqrstuv1234567890\n", "utf8");
+  writeFileSync(join(cwd, ".akephalos", "rules.md"), "Leaked key: sk-proj-abcdefghijklmnopqrstuv1234567890\n", "utf8");
   const result = runCliRaw(cwd, ["scan"]);
 
   assert.notEqual(result.status, 0);
@@ -404,6 +404,44 @@ test("scan detects likely secrets without printing values", () => {
   assert.match(result.stdout, /rules\.md:1 \[fail\] OpenAI key/);
   assert.match(result.stdout, /value redacted/);
   assert.doesNotMatch(result.stdout, /sk-proj-abcdefghijklmnopqrstuv1234567890/);
+});
+
+test("scan --json reports machine-readable privacy findings", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  writeFileSync(join(cwd, ".akephalos", "rules.md"), "Leaked key: sk-proj-abcdefghijklmnopqrstuv1234567890\n", "utf8");
+  writeFileSync(join(cwd, ".akephalos", "tools.md"), "Workspace: C:\\Users\\alice\\Desktop\\Project\n", "utf8");
+  const result = runCliRaw(cwd, ["scan", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.notEqual(result.status, 0);
+  assert.equal(report.version, "0.1.0");
+  assert.equal(report.bundle, join(cwd, ".akephalos"));
+  assert.equal(report.ok, false);
+  assert.ok(report.counts.fail >= 1);
+  assert.equal(report.counts.warn, 1);
+  assert.ok(report.scannedFiles.includes("rules.md"));
+  assert.ok(report.scannedFiles.includes("tools.md"));
+  assert.ok(report.issues.some((issue) => issue.file === "rules.md" && issue.kind === "OpenAI key"));
+  assert.ok(report.issues.some((issue) => issue.file === "tools.md" && issue.kind === "user path"));
+  assert.equal(result.stderr, "");
+  assert.doesNotMatch(result.stdout, /sk-proj-abcdefghijklmnopqrstuv1234567890/);
+});
+
+test("scan --json reports a missing bundle without prose", () => {
+  const cwd = tempWorkspace();
+
+  const result = runCliRaw(cwd, ["scan", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.notEqual(result.status, 0);
+  assert.equal(report.ok, false);
+  assert.equal(report.bundle, join(cwd, ".akephalos"));
+  assert.equal(report.counts.fail, 1);
+  assert.deepEqual(report.scannedFiles, []);
+  assert.equal(report.issues[0].kind, "missing bundle");
+  assert.equal(result.stderr, "");
 });
 
 test("scan warns for local user paths without failing", () => {

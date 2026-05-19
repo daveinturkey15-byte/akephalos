@@ -31,7 +31,7 @@ Commands:
   init                         Create a .akephalos passport bundle
   status [--json]              Show bundle status and memory count
   doctor [--json]              Run a non-destructive passport health check
-  scan                         Scan the passport for likely secrets and privacy leaks
+  scan [--json]                Scan the passport for likely secrets and privacy leaks
   merge-ledgers                Resolve JSONL ledger conflict markers safely
   print <target>               Print identity, rules, tools, projects, or memories
   add-memory "text"            Append a non-secret durable memory
@@ -58,6 +58,7 @@ Examples:
   akephalos doctor
   akephalos doctor --json
   akephalos scan
+  akephalos scan --json
   akephalos merge-ledgers
   akephalos add-memory "User prefers small dependency-light CLI changes"
   akephalos import-harness "Pi IDE" --tool "terminal" --preference "Use small changes"
@@ -198,6 +199,17 @@ type ScanIssue = {
 type ScanResult = {
   issues: ScanIssue[];
   scannedFiles: string[];
+};
+
+type ScanCounts = Record<ScanSeverity, number>;
+
+type ScanReport = {
+  version: string;
+  bundle: string;
+  ok: boolean;
+  counts: ScanCounts;
+  scannedFiles: string[];
+  issues: ScanIssue[];
 };
 
 const bundleFiles = [
@@ -2635,17 +2647,61 @@ function formatScanIssue(issue: ScanIssue): string {
   return `- ${issue.file}:${issue.line} [${issue.severity}] ${issue.kind}: ${issue.message} Next: ${issue.nextAction}`;
 }
 
-function buildScanText(root: string): { text: string; hasFailures: boolean } {
-  const scan = scanBundle(root);
-  const counts: Record<ScanSeverity, number> = {
+function countScanIssues(issues: ScanIssue[]): ScanCounts {
+  const counts: ScanCounts = {
     info: 0,
     warn: 0,
     fail: 0,
   };
 
-  for (const issue of scan.issues) {
+  for (const issue of issues) {
     counts[issue.severity] += 1;
   }
+
+  return counts;
+}
+
+function buildScanReport(root: string): ScanReport {
+  const rootExists = existsSync(root);
+
+  if (!rootExists || !statSync(root).isDirectory()) {
+    const issue: ScanIssue = {
+      severity: "fail",
+      file: ".akephalos",
+      line: 0,
+      kind: rootExists ? "invalid bundle" : "missing bundle",
+      message: rootExists ? `.akephalos exists but is not a directory at ${root}` : `.akephalos bundle is missing at ${root}`,
+      nextAction: rootExists
+        ? "Move the file aside and restore a .akephalos directory."
+        : "Run akephalos init or clone the shared passport repo as .akephalos.",
+    };
+
+    return {
+      version,
+      bundle: root,
+      ok: false,
+      counts: countScanIssues([issue]),
+      scannedFiles: [],
+      issues: [issue],
+    };
+  }
+
+  const scan = scanBundle(root);
+  const counts = countScanIssues(scan.issues);
+
+  return {
+    version,
+    bundle: root,
+    ok: counts.fail === 0,
+    counts,
+    scannedFiles: scan.scannedFiles,
+    issues: scan.issues,
+  };
+}
+
+function buildScanText(root: string): { text: string; hasFailures: boolean } {
+  const scan = scanBundle(root);
+  const counts = countScanIssues(scan.issues);
 
   const lines = [
     "Akephalos scan",
@@ -2670,7 +2726,18 @@ function buildScanText(root: string): { text: string; hasFailures: boolean } {
   };
 }
 
-function printScan(): void {
+function printScan(options: { json: boolean } = { json: false }): void {
+  if (options.json) {
+    const report = buildScanReport(bundleRoot());
+    process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
+
+    if (!report.ok) {
+      process.exitCode = 1;
+    }
+
+    return;
+  }
+
   const root = requireBundleRoot();
 
   if (!root) {
@@ -3528,14 +3595,14 @@ function main(args: string[]): void {
   }
 
   if (command === "scan") {
-    if (rest.length > 0) {
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== "--json")) {
       process.stderr.write(`Unknown option for scan: ${rest[0]}\n`);
       process.exitCode = 1;
       return;
     }
 
     try {
-      printScan();
+      printScan({ json: rest[0] === "--json" });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       process.stderr.write(`Scan failed: ${message}\n`);
