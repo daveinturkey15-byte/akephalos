@@ -30,7 +30,7 @@ Usage:
 Commands:
   init                         Create a .akephalos passport bundle
   status                       Show bundle status and memory count
-  doctor                       Run a non-destructive passport health check
+  doctor [--json]              Run a non-destructive passport health check
   scan                         Scan the passport for likely secrets and privacy leaks
   merge-ledgers                Resolve JSONL ledger conflict markers safely
   print <target>               Print identity, rules, tools, projects, or memories
@@ -56,6 +56,7 @@ Options:
 Examples:
   akephalos init
   akephalos doctor
+  akephalos doctor --json
   akephalos scan
   akephalos merge-ledgers
   akephalos add-memory "User prefers small dependency-light CLI changes"
@@ -944,7 +945,7 @@ function formatDoctorSection(title: "PASS" | "WARN" | "FAIL", entries: Array<str
   return lines;
 }
 
-function buildDoctorText(): { text: string; hasFailures: boolean } {
+function buildDoctor(): DoctorResult {
   const result: DoctorResult = {
     pass: [],
     warn: [],
@@ -974,8 +975,13 @@ function buildDoctorText(): { text: string; hasFailures: boolean } {
     checkScheduledSyncDocumentation(result, root);
   }
 
+  return result;
+}
+
+function buildDoctorText(result = buildDoctor()): { text: string; hasFailures: boolean } {
   const lines = [
     "Akephalos doctor",
+    `Bundle: ${bundleRoot()}`,
     "",
     ...formatDoctorSection("PASS", result.pass),
     "",
@@ -990,8 +996,32 @@ function buildDoctorText(): { text: string; hasFailures: boolean } {
   };
 }
 
-function printDoctor(): void {
-  const doctor = buildDoctorText();
+function printDoctor(options: { json: boolean } = { json: false }): void {
+  const result = buildDoctor();
+
+  if (options.json) {
+    process.stdout.write(`${JSON.stringify({
+      version,
+      bundle: bundleRoot(),
+      ok: result.fail.length === 0,
+      counts: {
+        pass: result.pass.length,
+        warn: result.warn.length,
+        fail: result.fail.length,
+      },
+      pass: result.pass,
+      warn: result.warn,
+      fail: result.fail,
+    }, null, 2)}\n`);
+
+    if (result.fail.length > 0) {
+      process.exitCode = 1;
+    }
+
+    return;
+  }
+
+  const doctor = buildDoctorText(result);
 
   process.stdout.write(doctor.text);
 
@@ -3507,14 +3537,14 @@ function main(args: string[]): void {
   }
 
   if (command === "doctor") {
-    if (rest.length > 0) {
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== "--json")) {
       process.stderr.write(`Unknown option for doctor: ${rest[0]}\n`);
       process.exitCode = 1;
       return;
     }
 
     try {
-      printDoctor();
+      printDoctor({ json: rest[0] === "--json" });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       process.stderr.write(`Doctor failed: ${message}\n`);

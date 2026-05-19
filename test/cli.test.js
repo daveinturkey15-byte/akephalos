@@ -103,6 +103,36 @@ test("init does not overwrite existing files", () => {
   assert.equal(readFileSync(join(cwd, ".akephalos", "rules.md"), "utf8"), customRules);
 });
 
+test("doctor --json reports machine-readable health", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  const result = runCli(cwd, ["doctor", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.equal(report.version, "0.1.0");
+  assert.equal(report.bundle, join(cwd, ".akephalos"));
+  assert.equal(report.ok, true);
+  assert.equal(report.counts.fail, 0);
+  assert.ok(report.counts.pass > 0);
+  assert.ok(Array.isArray(report.pass));
+  assert.ok(Array.isArray(report.warn));
+  assert.ok(Array.isArray(report.fail));
+});
+
+test("doctor --json exits non-zero for missing bundles without printing prose", () => {
+  const cwd = tempWorkspace();
+
+  const result = runCliRaw(cwd, ["doctor", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.notEqual(result.status, 0);
+  assert.equal(report.ok, false);
+  assert.equal(report.counts.fail, 1);
+  assert.equal(report.fail[0].message, `.akephalos bundle is missing at ${join(cwd, ".akephalos")}`);
+  assert.equal(result.stderr, "");
+});
+
 test("add-memory appends valid JSONL", () => {
   const cwd = tempWorkspace();
 
