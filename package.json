@@ -17,10 +17,17 @@
   "keywords": [
     "ai",
     "agents",
+    "agent-memory",
+    "context",
     "identity",
-    "memory",
-    "markdown"
+    "local-first",
+    "markdown",
+    "mcp"
   ],
+  "homepage": "https://github.com/sunnja69/akephalos#readme",
+  "bugs": {
+    "url": "https://github.com/sunnja69/akephalos/issues"
+  },
   "license": "MIT",
   "type": "commonjs",
   "files": [
