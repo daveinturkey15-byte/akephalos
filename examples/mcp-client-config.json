@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "akephalos": {
+      "command": "node",
+      "args": ["/absolute/path/to/akephalos/dist/index.js", "mcp"],
+      "cwd": "/absolute/path/to/workspace-with-.akephalos"
+    }
+  }
+}
