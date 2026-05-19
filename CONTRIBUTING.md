@@ -19,6 +19,8 @@ npm run build
 npm test
 ```
 
+CI is useful coverage, but it is still not a full compatibility claim for your local terminal, shell, agent, or MCP client. If your platform/client is the thing being tested, add a short compatibility report with the exact OS, shell, Node/npm versions, Akephalos commit, and sanitized command output.
+
 If your change touches examples, docs, screenshots, GIFs, or transcripts, also inspect them for private data. For visual demos, use the [Screenshot and Demo Capture Guide](docs/SCREENSHOT_AND_DEMO_CAPTURE.md).
 
 ## Safety Rules

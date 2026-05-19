@@ -27,6 +27,8 @@ Best issue matches:
 - [Test Akephalos on macOS](https://github.com/sunnja69/akephalos/issues/1) — start with the [macOS recipe](PLATFORM_AGENT_SMOKE_RECIPES.md#macos-terminal-source-checkout-smoke-test).
 - [Test Akephalos on Linux](https://github.com/sunnja69/akephalos/issues/2)
 
+GitHub Actions catches obvious source-checkout regressions for maintainers, but it does not replace a real compatibility report from your own shell, terminal, agent, or MCP client. Platform reports should include the exact OS, shell, Node/npm versions, Akephalos commit, and sanitized command output.
+
 ## If you use an agent or MCP client
 
 Try the local `.akephalos` bundle with one agent/client and report exactly what worked:
@@ -95,6 +97,7 @@ Before opening a PR:
 
 - Keep the change tiny and focused.
 - Run `npm test`.
+- Check the pull request CI result after opening; if it fails, include the failing job and log excerpt in your follow-up instead of guessing.
 - Re-read any transcript, screenshot, or report for private data.
 - State the exact OS/client/tool you tested.
 - Say whether the result is `known-working`, `configured`, `unknown`, or `broken`; do not overclaim.
