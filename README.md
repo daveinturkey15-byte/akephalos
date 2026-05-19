@@ -59,6 +59,15 @@ node dist/index.js print projects
 node dist/index.js print memories
 ```
 
+If an agent harness starts Akephalos from a different working directory, point the CLI at the exact local passport folder with `--bundle-dir`:
+
+```sh
+node dist/index.js --bundle-dir /path/to/.akephalos status
+node dist/index.js --bundle-dir /path/to/.akephalos print rules
+```
+
+`--bundle-dir` is local-only; it does not add hosted sync, account login, or automatic realtime sync.
+
 Add a durable non-secret memory:
 
 ```sh
