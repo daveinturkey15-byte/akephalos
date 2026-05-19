@@ -80,6 +80,15 @@ Best issue matches:
 - [Add a tiny terminal demo GIF or screenshot set](https://github.com/sunnja69/akephalos/issues/10)
 - [Improve MCP setup docs](https://github.com/sunnja69/akephalos/issues/6)
 
+## If you like small tests
+
+The safest code contributions for v0.1 are narrow regression tests around local-file behavior. Good first targets:
+
+- [Improve JSONL conflict merge tests](https://github.com/sunnja69/akephalos/issues/8) — add fixtures that cover `merge-ledgers` conflict markers, duplicate JSONL records, malformed rejected lines, and the generated `ledger.merge` event without changing the merge algorithm unless a failing test proves a bug.
+- Add one CLI test for a confusing docs command if the command already exists and the expected output is stable.
+
+Keep test data fictional. Do not include real memories, usernames, hostnames, private paths, tokens, or auth config in fixtures.
+
 ## PR checklist
 
 Before opening a PR:

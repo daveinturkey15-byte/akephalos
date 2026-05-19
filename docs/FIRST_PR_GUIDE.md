@@ -60,6 +60,16 @@ Good docs/example PRs are tiny:
 - Add one public-safe screenshot/GIF set.
 - Clarify one MCP client snippet without claiming it is verified unless you tested it.
 
+## Small test PR
+
+Good test PRs prove one local-file behavior and avoid fixtures with real personal data. Useful shapes:
+
+- Add a `test/cli.test.js` case for a stable CLI command.
+- Cover one JSONL edge case such as duplicate ledger records, conflict markers, malformed rejected lines, or event logging.
+- Keep the expected output narrow so future contributors can understand the failure quickly.
+
+If you touch `merge-ledgers`, link [issue #8](https://github.com/sunnja69/akephalos/issues/8) and say which JSONL conflict shape your test covers.
+
 ## PR description template
 
 ```md
