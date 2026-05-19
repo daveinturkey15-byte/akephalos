@@ -3,6 +3,7 @@ name: Compatibility report
 description: Report a small Akephalos v0.1 trial with a local machine or agent harness.
 title: "Compatibility: <OS / agent / client>"
 labels:
+  - good first issue
   - help wanted
   - testing
 body:
@@ -30,11 +31,28 @@ body:
       options:
         - Codex
         - Claude Code
+        - Claude Desktop
         - Cursor
+        - Cline
+        - Roo Code
+        - opencode
         - Hermes/OpenClaw
         - MCP client
         - Plain CLI only
         - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status-label
+    attributes:
+      label: Report status
+      description: Pick the narrowest factual status. Do not mark known-working unless the listed checks actually passed with disposable data.
+      options:
+        - known-working — local source checkout passed the relevant CLI/MCP/agent checks
+        - configured — config shape is documented, but a real client run is not fully verified yet
+        - broken — tested and hit a reproducible failure
+        - unknown — partial report or unclear result
     validations:
       required: true
 
@@ -65,6 +83,7 @@ body:
         - label: "`npm test` completed, or I included the error above."
         - label: "`akephalos scan` completed, or I included the error above."
         - label: If I tested an MCP client, I confirmed whether it could read an Akephalos resource.
+        - label: If I tested an MCP client, I confirmed whether at least one tool call such as `get_status` or `add_memory` was visible/callable.
 
   - type: textarea
     id: result
