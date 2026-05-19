@@ -1,94 +1,98 @@
 name: Compatibility report
 
-description: Report a small Akephalos v0.1 trial with a local machine or agent harness.
-title: "Compatibility: <OS / agent / client>"
+description: Report a source-checkout, OS, agent, or MCP client smoke test using disposable data.
+title: "Compatibility report: "
 labels:
-  - good first issue
   - help wanted
   - testing
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for trying Akephalos. Please use fictional/non-secret passport data only.
-
-        Do not paste tokens, passwords, private keys, auth paths, private repository URLs, real personal memories, or machine-specific private paths.
-
-  - type: input
-    id: environment
-    attributes:
-      label: Environment
-      description: OS, shell, Node version, and install method.
-      placeholder: "Windows 11 PowerShell, Node 20.x, source checkout"
-    validations:
-      required: true
-
+        Thanks for testing Akephalos v0.1. Please use only fictional/disposable `.akephalos` data and redact private paths, hostnames, usernames, tokens, private repo names, and real memories.
   - type: dropdown
-    id: agent-client
+    id: report-type
     attributes:
-      label: Agent/client tested
-      multiple: true
+      label: What did you test?
       options:
-        - Codex
-        - Claude Code
-        - Claude Desktop
-        - Cursor
-        - Cline
-        - Roo Code
-        - opencode
-        - Hermes/OpenClaw
+        - Source checkout / CLI quickstart
+        - Linux / WSL
+        - macOS
+        - Windows
         - MCP client
-        - Plain CLI only
-        - Other
+        - Agent harness
+        - Other local setup
     validations:
       required: true
-
-  - type: dropdown
-    id: status-label
+  - type: input
+    id: os
     attributes:
-      label: Report status
-      description: Pick the narrowest factual status. Do not mark known-working unless the listed checks actually passed with disposable data.
-      options:
-        - known-working — local source checkout passed the relevant CLI/MCP/agent checks
-        - configured — config shape is documented, but a real client run is not fully verified yet
-        - broken — tested and hit a reproducible failure
-        - unknown — partial report or unclear result
+      label: OS and version
+      placeholder: "Example: Windows 11, macOS 15, Ubuntu 24.04, WSL2 Ubuntu"
     validations:
       required: true
-
+  - type: input
+    id: shell
+    attributes:
+      label: Shell / terminal
+      placeholder: "Example: PowerShell 7, zsh, bash, Windows Terminal"
+  - type: input
+    id: node
+    attributes:
+      label: Node and npm versions
+      placeholder: "Example: node v22.x, npm 10.x"
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Akephalos commit or branch tested
+      placeholder: "Example: main at abc1234, or PR #12 branch"
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Agent / MCP client tested, if any
+      placeholder: "Example: Claude Desktop, Cursor, Codex CLI, Cline, Roo Code, opencode, Hermes/OpenClaw"
   - type: textarea
     id: commands
     attributes:
-      label: Commands run
-      description: Paste a short transcript with private paths and secrets removed.
+      label: Commands or sanitized config tried
+      description: Paste only public-safe commands/config. Replace private paths with placeholders such as /path/to/akephalos or C:\\path\\to\\akephalos.
       render: shell
       placeholder: |
+        git clone https://github.com/sunnja69/akephalos.git
+        cd akephalos
         npm ci
         npm run build
-        node dist/index.js init
-        node dist/index.js add-memory "Demo user prefers short CLI examples."
-        node dist/index.js status
-        node dist/index.js scan
+        node dist/index.js --help
     validations:
       required: true
-
-  - type: checkboxes
-    id: checks
-    attributes:
-      label: Checks completed
-      options:
-        - label: I used fictional/non-secret passport data.
-          required: true
-        - label: "`npm run build` completed, or I included the error above."
-        - label: "`npm test` completed, or I included the error above."
-        - label: "`akephalos scan` completed, or I included the error above."
-        - label: If I tested an MCP client, I confirmed whether it could read an Akephalos resource.
-        - label: If I tested an MCP client, I confirmed whether at least one tool call such as `get_status` or `add_memory` was visible/callable.
-
   - type: textarea
     id: result
     attributes:
-      label: Result
-      description: What worked, what broke, and what should be clearer for the next tester?
+      label: What happened?
+      description: Include what passed, failed, or was not tested. Keep the claim narrow and factual.
+      placeholder: |
+        - npm ci:
+        - npm run build:
+        - npm test:
+        - CLI quickstart:
+        - MCP/client result, if tested:
+        - Any confusing docs or errors:
     validations:
       required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-safety checks
+      options:
+        - label: I used only fictional/disposable passport data.
+          required: true
+        - label: I removed private paths, hostnames, usernames, tokens, private repository names, auth config, and real memories.
+          required: true
+        - label: I am not claiming hosted cloud sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
+          required: true
+        - label: I kept the result to v0.1 / early MVP behavior that I actually tested.
+          required: true

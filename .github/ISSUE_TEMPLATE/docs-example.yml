@@ -1,0 +1,50 @@
+name: Docs or example improvement
+
+description: Suggest a small docs, transcript, screenshot, starter-passport, or contributor-onboarding improvement.
+title: "Docs: "
+labels:
+  - docs
+  - help wanted
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for small public-safe docs/example improvements. If you ran Akephalos on a real OS, agent, or MCP client, the compatibility-report form is usually a better fit.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Quickstart / source checkout
+        - MCP setup notes
+        - Agent/harness notes
+        - Demo transcript / screenshot / GIF
+        - Starter passport example
+        - Contributor guidance
+        - Other docs/example
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is confusing or missing?
+      placeholder: "Example: The quickstart says to run a command before building, or an MCP snippet needs clearer path placeholders."
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-change
+    attributes:
+      label: Suggested small change
+      description: A short wording change, command correction, or public-safe example is enough.
+      placeholder: "Proposed wording or checklist item..."
+  - type: checkboxes
+    id: guardrails
+    attributes:
+      label: Guardrails
+      options:
+        - label: My example uses fictional/disposable data only.
+          required: true
+        - label: I did not include tokens, passwords, private keys, real memories, private repo names, auth paths, hostnames, or private local paths.
+          required: true
+        - label: I am not implying hosted sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
+          required: true

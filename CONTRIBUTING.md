@@ -40,7 +40,7 @@ For lighter OS/client smoke tests that do not prove full harness sync, use a com
 
 ## Issue and PR Templates
 
-- Use the GitHub compatibility-report issue form for OS, source-checkout, agent, or MCP client smoke tests; use the docs/example issue form for small wording, transcript, screenshot, or starter-passport improvements.
-- Keep PR descriptions small and factual: what changed, why it helps v0.1 adopters, and how you verified it.
+- Use the [compatibility-report issue form](https://github.com/sunnja69/akephalos/issues/new?template=compatibility-report.yml) for OS, source-checkout, agent, or MCP client smoke tests; use the [docs/example issue form](https://github.com/sunnja69/akephalos/issues/new?template=docs-example.yml) for small wording, transcript, screenshot, or starter-passport improvements.
+- Keep PR descriptions small and factual: what changed, why it helps v0.1 adopters, and how you verified it. The repository PR template asks for the same adoption impact, verification, and guardrail checks.
 - If you did not run the full test suite because the change is docs-only, say so explicitly and inspect the rendered Markdown/examples for private data.
 - The [First PR Guide](docs/FIRST_PR_GUIDE.md) has a copy-pasteable PR description checklist for compatibility reports, docs/example fixes, and small tests.

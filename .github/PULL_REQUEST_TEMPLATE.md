@@ -1,21 +1,17 @@
-# Pull request
-
-## What changed?
+## What changed
 
 - 
 
-## Why is this useful for Akephalos v0.1 adopters/contributors?
+## Why this helps Akephalos v0.1 adopters/contributors
 
 - 
 
 ## Verification
 
-Please keep reports factual and source-checkout based unless the change is docs-only.
-
 - [ ] `npm test` passed, or this is docs-only and I inspected the rendered Markdown/examples.
 - [ ] I used only fictional/demo `.akephalos` data.
 - [ ] I removed private paths, hostnames, usernames, auth config, tokens, private repo names, and real memories.
-- [ ] I avoided claims of hosted cloud sync, realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
+- [ ] Any compatibility status is narrow, factual, and based on a real disposable-data smoke test.
 
 ## Compatibility result, if relevant
 
@@ -25,3 +21,7 @@ Please keep reports factual and source-checkout based unless the change is docs-
 - Result: `unknown` / `configured` / `known-working` / `broken`
 
 Use `known-working` only after a real read, fictional memory append, sync, and pull-back check succeeds with non-sensitive data. For lighter tests, prefer `configured` or a compatibility report issue.
+
+## Guardrails
+
+This PR does not add or imply hosted cloud sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
