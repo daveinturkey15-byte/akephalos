@@ -2,7 +2,7 @@
 
 Akephalos `v0.1` can run as a local MCP stdio server from a source checkout. These snippets are starting points for contributors who want to test Akephalos with real MCP clients.
 
-Status note: snippets on this page are **configuration shapes**, not compatibility claims. Please only mark a client `known-working` after a real smoke test with disposable data. Cursor/Cline/Roo-style testers can use the [VS Code MCP Client Notes](VS_CODE_MCP_CLIENT_NOTES.md) for a narrower checklist, and opencode testers can use the [opencode MCP Client Notes](OPENCODE_MCP_CLIENT_NOTES.md). When you are ready to report a real client run, use the [MCP Client Smoke-Test Worksheet](MCP_CLIENT_SMOKE_WORKSHEET.md).
+Status note: snippets on this page are **configuration shapes**, not compatibility claims. Please only mark a client `known-working` after a real smoke test with disposable data. Cursor/Cline/Roo-style testers can use the [VS Code MCP Client Notes](VS_CODE_MCP_CLIENT_NOTES.md) for a narrower checklist, Cline/Roo testers can use the focused [Cline/Roo MCP Client Notes](CLINE_ROO_MCP_CLIENT_NOTES.md), and opencode testers can use the [opencode MCP Client Notes](OPENCODE_MCP_CLIENT_NOTES.md). When you are ready to report a real client run, use the [MCP Client Smoke-Test Worksheet](MCP_CLIENT_SMOKE_WORKSHEET.md).
 
 ## Build the local server first
 
@@ -78,7 +78,7 @@ Good first reports:
 - [Test Akephalos as a Cursor MCP server](https://github.com/sunnja69/akephalos/issues/13)
 - [Test Akephalos with Cline or Roo Code MCP clients](https://github.com/sunnja69/akephalos/issues/16)
 
-Use the [VS Code MCP Client Notes](VS_CODE_MCP_CLIENT_NOTES.md) to capture the exact settings path, resource/tool behavior, and status wording without overclaiming support.
+Use the [VS Code MCP Client Notes](VS_CODE_MCP_CLIENT_NOTES.md) to capture the exact settings path, resource/tool behavior, and status wording without overclaiming support. Cline/Roo testers can use the focused [Cline/Roo MCP Client Notes](CLINE_ROO_MCP_CLIENT_NOTES.md) for issue #16.
 
 ## opencode style
 
