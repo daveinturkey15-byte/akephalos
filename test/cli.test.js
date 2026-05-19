@@ -126,6 +126,34 @@ test("add-memory appends valid JSONL", () => {
   assert.match(memoryEvents[0].id, idPattern);
 });
 
+test("add-memory accepts source attribution", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  runCli(cwd, ["add-memory", "--source", "codex-cli", "validated", "quickstart"]);
+
+  const memories = readJsonl(join(cwd, ".akephalos", "memories.jsonl"));
+  assert.equal(memories.length, 1);
+  assert.equal(memories[0].source, "codex-cli");
+  assert.equal(memories[0].text, "validated quickstart");
+
+  const events = readJsonl(join(cwd, ".akephalos", "events.jsonl"));
+  const memoryEvent = events.find((event) => event.type === "memory.add");
+  assert.equal(memoryEvent.source, "codex-cli");
+  assert.equal(memoryEvent.text, "validated quickstart");
+});
+
+test("add-memory rejects invalid source attribution", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  const result = runCliRaw(cwd, ["add-memory", "--source", "bad source", "memory text"]);
+
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Source must be 1-64 characters/);
+  assert.equal(readJsonl(join(cwd, ".akephalos", "memories.jsonl")).length, 0);
+});
+
 test("add-memory refuses secret-looking text", () => {
   const cwd = tempWorkspace();
 

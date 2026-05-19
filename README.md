@@ -59,10 +59,11 @@ node dist/index.js print projects
 node dist/index.js print memories
 ```
 
-Add a durable non-secret memory:
+Add a durable non-secret memory. Agent harnesses can pass `--source <name>` so the JSONL ledger shows which local tool learned the note:
 
 ```sh
 node dist/index.js add-memory "User prefers small dependency-light CLI changes."
+node dist/index.js add-memory --source codex "Validated the source-checkout smoke test."
 ```
 
 Import a harness profile:
@@ -131,6 +132,7 @@ akephalos print tools
 akephalos print projects
 akephalos print memories
 akephalos add-memory "text"
+akephalos add-memory --source codex "text"
 akephalos import-harness "Harness Name" --tool "tool" --preference "preference"
 akephalos import-harness --auto
 akephalos harness list

@@ -49,6 +49,7 @@ Print targets:
   identity, rules, tools, projects, memories
 
 Options:
+  --source <name>              Set add-memory source, e.g. codex or claude-code
   --force                      Overwrite generated files during init
   -h, --help                   Show this help output
   -v, --version                Show the CLI version
@@ -59,6 +60,7 @@ Examples:
   akephalos scan
   akephalos merge-ledgers
   akephalos add-memory "User prefers small dependency-light CLI changes"
+  akephalos add-memory --source codex "Validated the test command in this repo"
   akephalos import-harness "Pi IDE" --tool "terminal" --preference "Use small changes"
   akephalos import-harness --auto
   akephalos harness list
@@ -99,6 +101,11 @@ type HarnessImport = {
 type HarnessImportArgs = {
   auto: boolean;
   imports: HarnessImport[];
+};
+
+type AddMemoryArgs = {
+  source: string;
+  text: string;
 };
 
 type HarnessStatus = "unknown" | "detected" | "configured" | "known-working" | "broken" | "unsupported";
@@ -2636,7 +2643,41 @@ function appendMemoryRecord(root: string, source: string, type: string, text: st
   return time;
 }
 
-function addMemory(text: string): void {
+function parseAddMemoryArgs(args: string[]): AddMemoryArgs {
+  let source = "cli";
+  const textParts: string[] = [];
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg === "--source") {
+      const value = args[index + 1];
+
+      if (!value || value.startsWith("--")) {
+        throw new Error("Missing value for --source.");
+      }
+
+      source = value;
+      index += 1;
+      continue;
+    }
+
+    textParts.push(arg);
+  }
+
+  if (!/^[A-Za-z0-9_.:-]{1,64}$/.test(source)) {
+    throw new Error("Source must be 1-64 characters using letters, numbers, dot, underscore, colon, or hyphen.");
+  }
+
+  assertNonSecretText("Memory source", source);
+
+  return {
+    source,
+    text: textParts.join(" ").trim(),
+  };
+}
+
+function addMemory(text: string, source = "cli"): void {
   const root = requireBundleRoot();
 
   if (!root) {
@@ -2654,10 +2695,10 @@ function addMemory(text: string): void {
     return;
   }
 
-  const time = appendMemoryRecord(root, "cli", "memory.add", text);
+  const time = appendMemoryRecord(root, source, "memory.add", text);
   appendEventRecord(root, {
     time,
-    source: "cli",
+    source,
     type: "memory.add",
     text,
   });
@@ -3333,16 +3374,25 @@ function main(args: string[]): void {
   }
 
   if (command === "add-memory") {
-    const text = rest.join(" ").trim();
+    let addArgs: AddMemoryArgs;
 
-    if (!text) {
-      process.stderr.write('Usage: akephalos add-memory "text"\n');
+    try {
+      addArgs = parseAddMemoryArgs(rest);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      process.stderr.write(`Add memory failed: ${message}\n`);
+      process.exitCode = 1;
+      return;
+    }
+
+    if (!addArgs.text) {
+      process.stderr.write('Usage: akephalos add-memory [--source <name>] "text"\n');
       process.exitCode = 1;
       return;
     }
 
     try {
-      addMemory(text);
+      addMemory(addArgs.text, addArgs.source);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       process.stderr.write(`Add memory failed: ${message}\n`);
