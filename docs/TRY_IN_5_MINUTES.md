@@ -12,6 +12,8 @@ npm run build
 node dist/index.js --help
 ```
 
+If `npm ci`, `npm run build`, or `node dist/index.js --help` fails, use [Source-Checkout Troubleshooting](SOURCE_CHECKOUT_TROUBLESHOOTING.md) before filing an issue. The most helpful report is the exact failing command plus OS, shell, Node/npm versions, Akephalos commit, and sanitized output.
+
 ## 2. Create a disposable passport
 
 Run this from a throwaway directory, not inside a real private passport repo:
@@ -69,3 +71,5 @@ If the walkthrough works or breaks in your environment, please open a small issu
 - which agent/client you tried, if any
 
 Good starting issues are labeled [`good first issue`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) and [`help wanted`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22).
+
+If your first contribution is a failed source-checkout report, the copy-paste issue shape in [Source-Checkout Troubleshooting](SOURCE_CHECKOUT_TROUBLESHOOTING.md) is enough. Small factual failures are useful in `v0.1`; please do not turn them into broad production-readiness claims.

@@ -16,8 +16,9 @@ Use fictional or disposable passport data only. Do not paste real memories, toke
    ```
 
 2. Run the disposable quickstart in [Try Akephalos in 5 Minutes](TRY_IN_5_MINUTES.md).
-3. If you are unsure what the early MVP can safely claim, skim the [Adopter FAQ](ADOPTER_FAQ.md).
-4. Open a compatibility report with your OS, shell, Node version, and sanitized command output. The [Compatibility Reports](COMPATIBILITY_REPORTS.md) page has a copy-pasteable template.
+3. If the source-checkout build or command path fails before you can test anything else, use [Source-Checkout Troubleshooting](SOURCE_CHECKOUT_TROUBLESHOOTING.md) to file a narrow, sanitized failure report instead of guessing at a fix.
+4. If you are unsure what the early MVP can safely claim, skim the [Adopter FAQ](ADOPTER_FAQ.md).
+5. Open a compatibility report with your OS, shell, Node version, and sanitized command output. The [Compatibility Reports](COMPATIBILITY_REPORTS.md) page has a copy-pasteable template.
 
 If the trial gives you a tiny fix or report worth submitting, use the [First PR Guide](FIRST_PR_GUIDE.md) before opening a pull request.
 
@@ -70,6 +71,7 @@ Help another adopter see the v0.1 flow before installing anything:
 
 - Improve the fictional [demo transcript](../examples/demo-transcript.md).
 - Improve the public-safe [starter passport example](../examples/starter-passport/README.md) if a first-time adopter gets stuck on the file shape.
+- Improve [Source-Checkout Troubleshooting](SOURCE_CHECKOUT_TROUBLESHOOTING.md) with one verified setup failure and its safest fix, using only sanitized output.
 - Add or improve a public-safe compatibility report listed in the [compatibility report examples index](../examples/compatibility-reports/README.md), such as the [WSL source-checkout smoke test](../examples/compatibility-reports/linux-wsl-source-checkout-2026-05-18.md).
 - Add or improve a public-safe MCP report, such as the [WSL MCP stdio smoke test](../examples/compatibility-reports/linux-wsl-mcp-stdio-2026-05-18.md), without claiming external clients are known-working unless you tested them.
 - Add or improve a public-safe agent-harness report, such as the [Hermes-hosted WSL harness smoke test](../examples/compatibility-reports/hermes-wsl-agent-harness-2026-05-18.md), without claiming full harness integration unless you tested it.
