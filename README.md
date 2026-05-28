@@ -1,5 +1,7 @@
 # Akephalos
 
+[![sunnja69/akephalos MCP server](https://glama.ai/mcp/servers/sunnja69/akephalos/badges/score.svg)](https://glama.ai/mcp/servers/sunnja69/akephalos)
+
 Akephalos is a tiny open-source, markdown-first passport for AI agents.
 
 It lets you carry your preferences, tools, rules, projects, harness notes, and durable memories across different AI agents and machines.
