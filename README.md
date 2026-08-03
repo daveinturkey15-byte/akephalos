@@ -282,3 +282,4 @@ For contributors and testers:
 - [docs/KNOWN_WORKING_AGENTS.md](docs/KNOWN_WORKING_AGENTS.md)
 - [examples/demo-passport](examples/demo-passport)
 - [examples/starter-passport](examples/starter-passport/README.md)
+- [examples/quickstart-terminal-transcript.md](examples/quickstart-terminal-transcript.md)
