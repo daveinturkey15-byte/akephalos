@@ -1,0 +1,99 @@
+name: Compatibility report
+
+description: Report a source-checkout, OS, agent, or MCP client smoke test using disposable data.
+title: "Compatibility report: "
+labels:
+  - good first issue
+  - help wanted
+  - testing
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing Akephalos v0.1. Please use only fictional/disposable `.akephalos` data and redact private paths, hostnames, usernames, tokens, private repo names, and real memories.
+  - type: dropdown
+    id: report-type
+    attributes:
+      label: What did you test?
+      options:
+        - Source checkout / CLI quickstart
+        - Linux / WSL
+        - macOS
+        - Windows
+        - MCP client
+        - Agent harness
+        - Other local setup
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS and version
+      placeholder: "Example: Windows 11, macOS 15, Ubuntu 24.04, WSL2 Ubuntu"
+    validations:
+      required: true
+  - type: input
+    id: shell
+    attributes:
+      label: Shell / terminal
+      placeholder: "Example: PowerShell 7, zsh, bash, Windows Terminal"
+  - type: input
+    id: node
+    attributes:
+      label: Node and npm versions
+      placeholder: "Example: node v22.x, npm 10.x"
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Akephalos commit or branch tested
+      placeholder: "Example: main at abc1234, or PR #12 branch"
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Agent / MCP client tested, if any
+      placeholder: "Example: Claude Desktop, Cursor, Codex CLI, Cline, Roo Code, opencode, Hermes/OpenClaw"
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands or sanitized config tried
+      description: Paste only public-safe commands/config. Replace private paths with placeholders such as /path/to/akephalos or C:\\path\\to\\akephalos.
+      render: shell
+      placeholder: |
+        git clone https://github.com/sunnja69/akephalos.git
+        cd akephalos
+        npm ci
+        npm run build
+        node dist/index.js --help
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened?
+      description: Include what passed, failed, or was not tested. Keep the claim narrow and factual.
+      placeholder: |
+        - npm ci:
+        - npm run build:
+        - npm test:
+        - CLI quickstart:
+        - MCP/client result, if tested:
+        - Any confusing docs or errors:
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-safety checks
+      options:
+        - label: I used only fictional/disposable passport data.
+          required: true
+        - label: I removed private paths, hostnames, usernames, tokens, private repository names, auth config, and real memories.
+          required: true
+        - label: I am not claiming hosted cloud sync, automatic realtime sync, OAuth, dashboards, vector DB, blockchain, npm availability, or production maturity.
+          required: true
+        - label: I kept the result to v0.1 / early MVP behavior that I actually tested.
+          required: true

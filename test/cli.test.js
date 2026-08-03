@@ -411,6 +411,83 @@ test("doctor redacts likely secrets", () => {
   assert.doesNotMatch(result.stdout, /supersecret123/);
 });
 
+test("merge-ledgers resolves JSONL conflict markers and deduplicates records", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  writeFileSync(
+    join(cwd, ".akephalos", "memories.jsonl"),
+    [
+      '{"id":"mem-1","time":"2026-01-01T00:00:00.000Z","type":"memory.add","text":"keep older"}',
+      "<<<<<<< HEAD",
+      '{"id":"mem-2","time":"2026-01-02T00:00:00.000Z","type":"memory.add","text":"ours"}',
+      '{"id":"mem-dup","time":"2026-01-03T00:00:00.000Z","type":"memory.add","text":"same"}',
+      "=======",
+      '{"id":"mem-dup","time":"2026-01-03T00:00:00.000Z","type":"memory.add","text":"same"}',
+      '{"id":"mem-3","time":"2026-01-04T00:00:00.000Z","type":"memory.add","text":"theirs"}',
+      ">>>>>>> branch",
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+
+  const result = runCli(cwd, ["merge-ledgers"]);
+
+  assert.match(result.stdout, /Merged ledgers/);
+  assert.match(result.stdout, /memories\.jsonl records: 4/);
+  assert.match(result.stdout, /Rejected lines: 0/);
+
+  const memoriesText = readFileSync(join(cwd, ".akephalos", "memories.jsonl"), "utf8");
+  assert.doesNotMatch(memoriesText, /<<<<<<<|=======|>>>>>>>/);
+  const memories = readJsonl(join(cwd, ".akephalos", "memories.jsonl"));
+  assert.deepEqual(
+    memories.map((entry) => entry.id),
+    ["mem-1", "mem-2", "mem-dup", "mem-3"],
+  );
+  assert.equal(existsSync(join(cwd, ".akephalos", "memories.rejected.jsonl")), false);
+
+  const events = readJsonl(join(cwd, ".akephalos", "events.jsonl"));
+  assert.ok(events.find((event) => event.type === "ledger.merge"));
+});
+
+test("merge-ledgers writes malformed conflict lines to a rejected ledger", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  writeFileSync(
+    join(cwd, ".akephalos", "events.jsonl"),
+    [
+      "<<<<<<< HEAD",
+      '{"id":"evt-1","time":"2026-01-01T00:00:00.000Z","type":"sync"}',
+      "=======",
+      "not json",
+      '{"id":"evt-2","time":"2026-01-02T00:00:00.000Z","type":"memory.add"}',
+      ">>>>>>> branch",
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+
+  const result = runCli(cwd, ["merge-ledgers"]);
+
+  assert.match(result.stdout, /events\.jsonl records: 3/);
+  assert.match(result.stdout, /Rejected lines: 1/);
+  assert.match(result.stdout, /Rejected output:/);
+
+  const eventsText = readFileSync(join(cwd, ".akephalos", "events.jsonl"), "utf8");
+  assert.doesNotMatch(eventsText, /<<<<<<<|=======|>>>>>>>|not json/);
+  const events = readJsonl(join(cwd, ".akephalos", "events.jsonl"));
+  assert.ok(events.find((event) => event.id === "evt-1"));
+  assert.ok(events.find((event) => event.id === "evt-2"));
+  assert.ok(events.find((event) => event.type === "ledger.merge"));
+
+  const rejected = readJsonl(join(cwd, ".akephalos", "events.rejected.jsonl"));
+  assert.equal(rejected.length, 1);
+  assert.equal(rejected[0].file, "events.jsonl");
+  assert.equal(rejected[0].text, "not json");
+  assert.match(rejected[0].reason, /malformed JSON/);
+});
+
 test("scan detects likely secrets without printing values", () => {
   const cwd = tempWorkspace();
 
@@ -565,6 +642,92 @@ test("merge-ledgers resolves JSONL conflict markers and preserves rejected lines
 
   const events = readJsonl(eventPath);
   assert.ok(events.some((event) => event.type === "ledger.merge" && event.id));
+});
+
+test("merge-ledgers dedupes equivalent legacy records without ids", () => {
+  const cwd = tempWorkspace();
+  const memoryPath = join(cwd, ".akephalos", "memories.jsonl");
+
+  runCli(cwd, ["init"]);
+  writeFileSync(
+    memoryPath,
+    [
+      JSON.stringify({ time: "2026-05-12T00:00:00.000Z", source: "legacy", type: "memory.add", text: "same" }),
+      JSON.stringify({ text: "same", type: "memory.add", source: "legacy", time: "2026-05-12T00:00:00.000Z" }),
+      JSON.stringify({ time: "2026-05-12T00:00:01.000Z", source: "legacy", type: "memory.add", text: "different" }),
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+
+  const result = runCli(cwd, ["merge-ledgers"]);
+
+  assert.match(result.stdout, /memories\.jsonl records: 2/);
+  const memories = readJsonl(memoryPath);
+  assert.equal(memories.length, 2);
+  assert.equal(memories.filter((memory) => memory.text === "same").length, 1);
+  assert.equal(memories.filter((memory) => memory.text === "different").length, 1);
+});
+
+test("merge-ledgers resolves events conflicts and records rejected event lines", () => {
+  const cwd = tempWorkspace();
+  const eventPath = join(cwd, ".akephalos", "events.jsonl");
+
+  runCli(cwd, ["init"]);
+  writeFileSync(
+    eventPath,
+    [
+      JSON.stringify({ id: "base-event", time: "2026-05-12T00:00:00.000Z", source: "base", type: "init" }),
+      "<<<<<<< HEAD",
+      JSON.stringify({ id: "ours-event", time: "2026-05-12T00:00:01.000Z", source: "ours", type: "memory.add" }),
+      "bad event json",
+      "=======",
+      JSON.stringify({ id: "theirs-event", time: "2026-05-12T00:00:02.000Z", source: "theirs", type: "memory.add" }),
+      ">>>>>>> branch",
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+
+  const result = runCli(cwd, ["merge-ledgers"]);
+
+  assert.match(result.stdout, /Rejected lines: 1/);
+  const eventText = readFileSync(eventPath, "utf8");
+  assert.doesNotMatch(eventText, /<<<<<<<|=======|>>>>>>>/);
+  const events = readJsonl(eventPath);
+  assert.ok(events.some((event) => event.id === "base-event"));
+  assert.ok(events.some((event) => event.id === "ours-event"));
+  assert.ok(events.some((event) => event.id === "theirs-event"));
+  assert.ok(events.some((event) => event.type === "ledger.merge" && event.id));
+  assert.match(readFileSync(join(cwd, ".akephalos", "events.rejected.jsonl"), "utf8"), /bad event json/);
+});
+
+test("merge-ledgers salvages unterminated JSONL conflict blocks", () => {
+  const cwd = tempWorkspace();
+  const memoryPath = join(cwd, ".akephalos", "memories.jsonl");
+
+  runCli(cwd, ["init"]);
+  writeFileSync(
+    memoryPath,
+    [
+      JSON.stringify({ id: "base", time: "2026-05-12T00:00:00.000Z", source: "base", type: "memory.add", text: "base" }),
+      "<<<<<<< HEAD",
+      JSON.stringify({ id: "ours", time: "2026-05-12T00:00:01.000Z", source: "ours", type: "memory.add", text: "ours" }),
+      "=======",
+      JSON.stringify({ id: "theirs", time: "2026-05-12T00:00:02.000Z", source: "theirs", type: "memory.add", text: "theirs" }),
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+
+  const result = runCli(cwd, ["merge-ledgers"]);
+
+  assert.match(result.stdout, /Rejected lines: 1/);
+  const memories = readJsonl(memoryPath);
+  assert.ok(memories.some((memory) => memory.id === "base"));
+  assert.ok(memories.some((memory) => memory.id === "ours"));
+  assert.ok(memories.some((memory) => memory.id === "theirs"));
+  assert.match(readFileSync(join(cwd, ".akephalos", "memories.rejected.jsonl"), "utf8"), /unterminated conflict block/);
 });
 
 test("sync-status is read-only", () => {

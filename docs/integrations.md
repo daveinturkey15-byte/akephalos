@@ -182,11 +182,15 @@ End-to-end pattern:
 
 ## MCP Usage
 
+For copy-pasteable client config snippets and a safe smoke-test checklist, see [Local MCP Setup Notes](MCP_SETUP.md).
+
 Akephalos can run as a local MCP stdio server:
 
 ```sh
 akephalos mcp
 ```
+
+For copyable client config examples, source-checkout paths, Windows path notes, and a smoke-test checklist, see [mcp-client-setup.md](mcp-client-setup.md).
 
 MCP resources:
 

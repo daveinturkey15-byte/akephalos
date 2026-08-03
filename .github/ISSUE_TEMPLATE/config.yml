@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Try Akephalos in 5 Minutes
+    url: https://github.com/sunnja69/akephalos/blob/main/docs/TRY_IN_5_MINUTES.md
+    about: Start here for a source-checkout trial with disposable data.
+  - name: Contributor Task Picker
+    url: https://github.com/sunnja69/akephalos/blob/main/docs/CONTRIBUTOR_TASKS.md
+    about: Find small v0.1 tasks that help adopters and maintainers.

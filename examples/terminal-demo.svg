@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="420" viewBox="0 0 920 420" role="img" aria-labelledby="title desc">
+  <title id="title">Akephalos v0.1 terminal demo</title>
+  <desc id="desc">A fictional terminal demo showing Akephalos init, add-memory, import-harness, scan, and print memories commands using disposable data.</desc>
+  <rect width="920" height="420" rx="18" fill="#0f172a"/>
+  <rect x="0" y="0" width="920" height="44" rx="18" fill="#111827"/>
+  <circle cx="26" cy="22" r="7" fill="#f87171"/>
+  <circle cx="50" cy="22" r="7" fill="#fbbf24"/>
+  <circle cx="74" cy="22" r="7" fill="#34d399"/>
+  <text x="104" y="27" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">Akephalos v0.1 local-first passport demo</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17">
+    <text x="32" y="82" fill="#93c5fd">$ node dist/index.js init</text>
+    <text x="32" y="112" fill="#e5e7eb">Created .akephalos/ with markdown/plain-file passport state.</text>
+
+    <text x="32" y="154" fill="#93c5fd">$ node dist/index.js add-memory "Demo user prefers local-first CLI tools."</text>
+    <text x="32" y="184" fill="#e5e7eb">Added durable non-secret memory to .akephalos/memories.jsonl.</text>
+
+    <text x="32" y="226" fill="#93c5fd">$ node dist/index.js import-harness "Demo Agent" --tool terminal --tool git</text>
+    <text x="32" y="256" fill="#e5e7eb">Imported harness notes for Demo Agent.</text>
+
+    <text x="32" y="298" fill="#93c5fd">$ node dist/index.js scan</text>
+    <text x="32" y="328" fill="#86efac">Scan complete: info 0, warn 0, fail 0</text>
+
+    <text x="32" y="370" fill="#93c5fd">$ node dist/index.js print memories</text>
+    <text x="32" y="400" fill="#e5e7eb">- Demo user prefers local-first CLI tools.</text>
+  </g>
+</svg>
