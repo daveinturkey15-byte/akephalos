@@ -344,7 +344,7 @@ test("global --bundle-dir targets a bundle outside the current workspace", () =>
   assert.equal(existsSync(join(bundle, "manifest.json")), true);
 
   const status = runCli(cwd, ["--bundle-dir", bundle, "status"]);
-  assert.match(status.stdout, new RegExp(`Bundle: found at ${bundle.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}`));
+  assert.match(status.stdout, new RegExp(`Bundle: found at ${bundle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
   assert.match(status.stdout, /Memory count: 1/);
 
   const printed = runCli(cwd, ["--bundle-dir", bundle, "print", "memories"]);
