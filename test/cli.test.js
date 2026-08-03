@@ -103,6 +103,36 @@ test("init does not overwrite existing files", () => {
   assert.equal(readFileSync(join(cwd, ".akephalos", "rules.md"), "utf8"), customRules);
 });
 
+test("doctor --json reports machine-readable health", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  const result = runCli(cwd, ["doctor", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.equal(report.version, "0.1.0");
+  assert.equal(report.bundle, join(cwd, ".akephalos"));
+  assert.equal(report.ok, true);
+  assert.equal(report.counts.fail, 0);
+  assert.ok(report.counts.pass > 0);
+  assert.ok(Array.isArray(report.pass));
+  assert.ok(Array.isArray(report.warn));
+  assert.ok(Array.isArray(report.fail));
+});
+
+test("doctor --json exits non-zero for missing bundles without printing prose", () => {
+  const cwd = tempWorkspace();
+
+  const result = runCliRaw(cwd, ["doctor", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.notEqual(result.status, 0);
+  assert.equal(report.ok, false);
+  assert.equal(report.counts.fail, 1);
+  assert.equal(report.fail[0].message, `.akephalos bundle is missing at ${join(cwd, ".akephalos")}`);
+  assert.equal(result.stderr, "");
+});
+
 test("add-memory appends valid JSONL", () => {
   const cwd = tempWorkspace();
 
@@ -266,6 +296,42 @@ test("status counts memories", () => {
   assert.match(result.stdout, /Memory count: 3/);
 });
 
+test("status --json reports machine-readable bundle state", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  runCli(cwd, ["add-memory", "one"]);
+  runCli(cwd, ["add-memory", "two"]);
+
+  const result = runCli(cwd, ["status", "--json"]);
+  const status = JSON.parse(result.stdout);
+
+  assert.equal(status.ok, true);
+  assert.equal(status.bundle.exists, true);
+  assert.equal(status.bundle.manifestVersion, "1");
+  assert.equal(status.memoryCount, 2);
+  assert.equal(status.files.length, 9);
+  assert.deepEqual(
+    status.files.map((file) => file.state),
+    Array(9).fill("ok"),
+  );
+  assert.deepEqual(status.warnings, []);
+});
+
+test("status --json reports a missing bundle without prose", () => {
+  const cwd = tempWorkspace();
+
+  const result = runCli(cwd, ["status", "--json"]);
+  const status = JSON.parse(result.stdout);
+
+  assert.equal(status.ok, false);
+  assert.equal(status.bundle.exists, false);
+  assert.equal(status.bundle.manifestVersion, null);
+  assert.equal(status.memoryCount, 0);
+  assert.deepEqual(status.files, []);
+  assert.doesNotMatch(result.stdout, /Run `akephalos init`/);
+});
+
 test("global --bundle-dir targets a bundle outside the current workspace", () => {
   const cwd = tempWorkspace();
   const other = tempWorkspace();
@@ -278,7 +344,7 @@ test("global --bundle-dir targets a bundle outside the current workspace", () =>
   assert.equal(existsSync(join(bundle, "manifest.json")), true);
 
   const status = runCli(cwd, ["--bundle-dir", bundle, "status"]);
-  assert.match(status.stdout, new RegExp(`Bundle: found at ${bundle.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}`));
+  assert.match(status.stdout, new RegExp(`Bundle: found at ${bundle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
   assert.match(status.stdout, /Memory count: 1/);
 
   const printed = runCli(cwd, ["--bundle-dir", bundle, "print", "memories"]);
@@ -426,7 +492,7 @@ test("scan detects likely secrets without printing values", () => {
   const cwd = tempWorkspace();
 
   runCli(cwd, ["init"]);
-  writeFileSync(join(cwd, ".akephalos", "rules.md"), "OPENAI_API_KEY=sk-proj-abcdefghijklmnopqrstuv1234567890\n", "utf8");
+  writeFileSync(join(cwd, ".akephalos", "rules.md"), "Leaked key: sk-proj-abcdefghijklmnopqrstuv1234567890\n", "utf8");
   const result = runCliRaw(cwd, ["scan"]);
 
   assert.notEqual(result.status, 0);
@@ -434,6 +500,44 @@ test("scan detects likely secrets without printing values", () => {
   assert.match(result.stdout, /rules\.md:1 \[fail\] OpenAI key/);
   assert.match(result.stdout, /value redacted/);
   assert.doesNotMatch(result.stdout, /sk-proj-abcdefghijklmnopqrstuv1234567890/);
+});
+
+test("scan --json reports machine-readable privacy findings", () => {
+  const cwd = tempWorkspace();
+
+  runCli(cwd, ["init"]);
+  writeFileSync(join(cwd, ".akephalos", "rules.md"), "Leaked key: sk-proj-abcdefghijklmnopqrstuv1234567890\n", "utf8");
+  writeFileSync(join(cwd, ".akephalos", "tools.md"), "Workspace: C:\\Users\\alice\\Desktop\\Project\n", "utf8");
+  const result = runCliRaw(cwd, ["scan", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.notEqual(result.status, 0);
+  assert.equal(report.version, "0.1.0");
+  assert.equal(report.bundle, join(cwd, ".akephalos"));
+  assert.equal(report.ok, false);
+  assert.ok(report.counts.fail >= 1);
+  assert.equal(report.counts.warn, 1);
+  assert.ok(report.scannedFiles.includes("rules.md"));
+  assert.ok(report.scannedFiles.includes("tools.md"));
+  assert.ok(report.issues.some((issue) => issue.file === "rules.md" && issue.kind === "OpenAI key"));
+  assert.ok(report.issues.some((issue) => issue.file === "tools.md" && issue.kind === "user path"));
+  assert.equal(result.stderr, "");
+  assert.doesNotMatch(result.stdout, /sk-proj-abcdefghijklmnopqrstuv1234567890/);
+});
+
+test("scan --json reports a missing bundle without prose", () => {
+  const cwd = tempWorkspace();
+
+  const result = runCliRaw(cwd, ["scan", "--json"]);
+  const report = JSON.parse(result.stdout);
+
+  assert.notEqual(result.status, 0);
+  assert.equal(report.ok, false);
+  assert.equal(report.bundle, join(cwd, ".akephalos"));
+  assert.equal(report.counts.fail, 1);
+  assert.deepEqual(report.scannedFiles, []);
+  assert.equal(report.issues[0].kind, "missing bundle");
+  assert.equal(result.stderr, "");
 });
 
 test("scan warns for local user paths without failing", () => {

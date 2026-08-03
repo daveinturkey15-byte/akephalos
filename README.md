@@ -58,12 +58,22 @@ Inspect the bundle:
 
 ```sh
 node dist/index.js status
+node dist/index.js status --json
+node dist/index.js doctor
+node dist/index.js doctor --json
 node dist/index.js scan
+node dist/index.js scan --json
 node dist/index.js print identity
 node dist/index.js print rules
 node dist/index.js print projects
 node dist/index.js print memories
 ```
+
+`status --json` reports bundle presence, manifest version, required-file states, memory count, and JSONL warnings for automation that only needs a quick readiness check.
+
+`doctor --json` is for agent harnesses, CI jobs, and scripts that need a stable machine-readable pass/warn/fail summary without scraping prose.
+
+`scan --json` gives contributors and automation a redacted machine-readable privacy report before sharing logs, screenshots, or compatibility reports.
 
 If an agent harness starts Akephalos from a different working directory, point the CLI at the exact local passport folder with `--bundle-dir`:
 
@@ -158,7 +168,7 @@ Not sure where to start? Use the [Contributor Task Picker](docs/CONTRIBUTOR_TASK
 ```txt
 akephalos init
 akephalos status
-akephalos scan
+akephalos scan [--json]
 akephalos print identity
 akephalos print rules
 akephalos print tools
@@ -175,7 +185,7 @@ akephalos pulse
 akephalos sync-status
 akephalos sync
 akephalos merge-ledgers
-akephalos scan
+akephalos scan [--json]
 akephalos compact
 akephalos export
 akephalos mcp

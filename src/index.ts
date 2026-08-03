@@ -30,9 +30,9 @@ Usage:
 
 Commands:
   init                         Create a .akephalos passport bundle
-  status                       Show bundle status and memory count
-  doctor                       Run a non-destructive passport health check
-  scan                         Scan the passport for likely secrets and privacy leaks
+  status [--json]              Show bundle status and memory count
+  doctor [--json]              Run a non-destructive passport health check
+  scan [--json]                Scan the passport for likely secrets and privacy leaks
   merge-ledgers                Resolve JSONL ledger conflict markers safely
   print <target>               Print identity, rules, tools, projects, or memories
   add-memory "text"            Append a non-secret durable memory
@@ -59,7 +59,9 @@ Examples:
   akephalos init
   akephalos --bundle-dir ~/passport/.akephalos status
   akephalos doctor
+  akephalos doctor --json
   akephalos scan
+  akephalos scan --json
   akephalos merge-ledgers
   akephalos add-memory "User prefers small dependency-light CLI changes"
   akephalos import-harness "Pi IDE" --tool "terminal" --preference "Use small changes"
@@ -85,6 +87,23 @@ type InitResult = {
 
 type JsonlParseResult = {
   entries: unknown[];
+  warnings: string[];
+};
+
+type StatusFileCheck = {
+  path: string;
+  state: "ok" | "missing" | "not directory" | "not file";
+};
+
+type StatusResult = {
+  ok: boolean;
+  bundle: {
+    path: string;
+    exists: boolean;
+    manifestVersion: string | null;
+  };
+  files: StatusFileCheck[];
+  memoryCount: number;
   warnings: string[];
 };
 
@@ -183,6 +202,17 @@ type ScanIssue = {
 type ScanResult = {
   issues: ScanIssue[];
   scannedFiles: string[];
+};
+
+type ScanCounts = Record<ScanSeverity, number>;
+
+type ScanReport = {
+  version: string;
+  bundle: string;
+  ok: boolean;
+  counts: ScanCounts;
+  scannedFiles: string[];
+  issues: ScanIssue[];
 };
 
 const bundleFiles = [
@@ -602,34 +632,81 @@ function formatStatusLine(root: string, entry: (typeof statusEntries)[number]): 
   return statSync(path).isFile() ? `  [ok] ${entry}` : `  [not file] ${entry}`;
 }
 
-function buildStatusText(): { text: string; warnings: string[] } {
+function getStatusFileCheck(root: string, entry: (typeof statusEntries)[number]): StatusFileCheck {
+  const path = join(root, entry);
+
+  if (!existsSync(path)) {
+    return { path: entry, state: "missing" };
+  }
+
+  if (entry.endsWith("/")) {
+    return { path: entry, state: statSync(path).isDirectory() ? "ok" : "not directory" };
+  }
+
+  return { path: entry, state: statSync(path).isFile() ? "ok" : "not file" };
+}
+
+function buildStatusResult(): StatusResult {
   const root = bundleRoot();
   const exists = existsSync(root) && statSync(root).isDirectory();
-  const lines = ["Akephalos status", ""];
-
-  lines.push(`Bundle: ${exists ? `found at ${root}` : "missing"}`);
 
   if (!exists) {
-    lines.push("Run `akephalos init` to create a bundle.");
     return {
-      text: `${lines.join("\n")}\n`,
+      ok: false,
+      bundle: {
+        path: root,
+        exists: false,
+        manifestVersion: null,
+      },
+      files: [],
+      memoryCount: 0,
       warnings: [],
     };
   }
 
-  lines.push(`Manifest version: ${readManifestVersion(root)}`);
+  const files = statusEntries.map((entry) => getStatusFileCheck(root, entry));
+  const memories = parseJsonlQuiet(join(root, "memories.jsonl"));
+  const allFilesOk = files.every((file) => file.state === "ok");
+
+  return {
+    ok: allFilesOk && memories.warnings.length === 0,
+    bundle: {
+      path: root,
+      exists: true,
+      manifestVersion: readManifestVersion(root),
+    },
+    files,
+    memoryCount: memories.entries.length,
+    warnings: memories.warnings,
+  };
+}
+
+function buildStatusText(): { text: string; warnings: string[] } {
+  const status = buildStatusResult();
+  const lines = ["Akephalos status", ""];
+
+  lines.push(`Bundle: ${status.bundle.exists ? `found at ${status.bundle.path}` : "missing"}`);
+
+  if (!status.bundle.exists) {
+    lines.push("Run `akephalos init` to create a bundle.");
+    return {
+      text: `${lines.join("\n")}\n`,
+      warnings: status.warnings,
+    };
+  }
+
+  lines.push(`Manifest version: ${status.bundle.manifestVersion}`);
   lines.push("Files:");
 
   for (const entry of statusEntries) {
-    lines.push(formatStatusLine(root, entry));
+    lines.push(formatStatusLine(status.bundle.path, entry));
   }
 
-  const memories = parseJsonlQuiet(join(root, "memories.jsonl"));
-  lines.push(`Memory count: ${memories.entries.length}`);
+  lines.push(`Memory count: ${status.memoryCount}`);
 
   return {
     text: `${lines.join("\n")}\n`,
-    warnings: memories.warnings,
+    warnings: status.warnings,
   };
 }
 
@@ -638,6 +715,10 @@ function printStatus(): void {
 
   process.stdout.write(status.text);
   printWarnings(status.warnings);
+}
+
+function printStatusJson(): void {
+  process.stdout.write(`${JSON.stringify(buildStatusResult(), null, 2)}\n`);
 }
 
 function addDoctorPass(result: DoctorResult, message: string): void {
@@ -951,7 +1032,7 @@ function formatDoctorSection(title: "PASS" | "WARN" | "FAIL", entries: Array<str
   return lines;
 }
 
-function buildDoctorText(): { text: string; hasFailures: boolean } {
+function buildDoctor(): DoctorResult {
   const result: DoctorResult = {
     pass: [],
     warn: [],
@@ -981,8 +1062,13 @@ function buildDoctorText(): { text: string; hasFailures: boolean } {
     checkScheduledSyncDocumentation(result, root);
   }
 
+  return result;
+}
+
+function buildDoctorText(result = buildDoctor()): { text: string; hasFailures: boolean } {
   const lines = [
     "Akephalos doctor",
+    `Bundle: ${bundleRoot()}`,
     "",
     ...formatDoctorSection("PASS", result.pass),
     "",
@@ -997,8 +1083,32 @@ function buildDoctorText(): { text: string; hasFailures: boolean } {
   };
 }
 
-function printDoctor(): void {
-  const doctor = buildDoctorText();
+function printDoctor(options: { json: boolean } = { json: false }): void {
+  const result = buildDoctor();
+
+  if (options.json) {
+    process.stdout.write(`${JSON.stringify({
+      version,
+      bundle: bundleRoot(),
+      ok: result.fail.length === 0,
+      counts: {
+        pass: result.pass.length,
+        warn: result.warn.length,
+        fail: result.fail.length,
+      },
+      pass: result.pass,
+      warn: result.warn,
+      fail: result.fail,
+    }, null, 2)}\n`);
+
+    if (result.fail.length > 0) {
+      process.exitCode = 1;
+    }
+
+    return;
+  }
+
+  const doctor = buildDoctorText(result);
 
   process.stdout.write(doctor.text);
 
@@ -2544,17 +2654,61 @@ function formatScanIssue(issue: ScanIssue): string {
   return `- ${issue.file}:${issue.line} [${issue.severity}] ${issue.kind}: ${issue.message} Next: ${issue.nextAction}`;
 }
 
-function buildScanText(root: string): { text: string; hasFailures: boolean } {
-  const scan = scanBundle(root);
-  const counts: Record<ScanSeverity, number> = {
+function countScanIssues(issues: ScanIssue[]): ScanCounts {
+  const counts: ScanCounts = {
     info: 0,
     warn: 0,
     fail: 0,
   };
 
-  for (const issue of scan.issues) {
+  for (const issue of issues) {
     counts[issue.severity] += 1;
   }
+
+  return counts;
+}
+
+function buildScanReport(root: string): ScanReport {
+  const rootExists = existsSync(root);
+
+  if (!rootExists || !statSync(root).isDirectory()) {
+    const issue: ScanIssue = {
+      severity: "fail",
+      file: ".akephalos",
+      line: 0,
+      kind: rootExists ? "invalid bundle" : "missing bundle",
+      message: rootExists ? `.akephalos exists but is not a directory at ${root}` : `.akephalos bundle is missing at ${root}`,
+      nextAction: rootExists
+        ? "Move the file aside and restore a .akephalos directory."
+        : "Run akephalos init or clone the shared passport repo as .akephalos.",
+    };
+
+    return {
+      version,
+      bundle: root,
+      ok: false,
+      counts: countScanIssues([issue]),
+      scannedFiles: [],
+      issues: [issue],
+    };
+  }
+
+  const scan = scanBundle(root);
+  const counts = countScanIssues(scan.issues);
+
+  return {
+    version,
+    bundle: root,
+    ok: counts.fail === 0,
+    counts,
+    scannedFiles: scan.scannedFiles,
+    issues: scan.issues,
+  };
+}
+
+function buildScanText(root: string): { text: string; hasFailures: boolean } {
+  const scan = scanBundle(root);
+  const counts = countScanIssues(scan.issues);
 
   const lines = [
     "Akephalos scan",
@@ -2579,7 +2733,18 @@ function buildScanText(root: string): { text: string; hasFailures: boolean } {
   };
 }
 
-function printScan(): void {
+function printScan(options: { json: boolean } = { json: false }): void {
+  if (options.json) {
+    const report = buildScanReport(bundleRoot());
+    process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
+
+    if (!report.ok) {
+      process.exitCode = 1;
+    }
+
+    return;
+  }
+
   const root = requireBundleRoot();
 
   if (!root) {
@@ -3488,14 +3653,14 @@ function main(args: string[]): void {
   }
 
   if (command === "scan") {
-    if (rest.length > 0) {
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== "--json")) {
       process.stderr.write(`Unknown option for scan: ${rest[0]}\n`);
       process.exitCode = 1;
       return;
     }
 
     try {
-      printScan();
+      printScan({ json: rest[0] === "--json" });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       process.stderr.write(`Scan failed: ${message}\n`);
@@ -3554,25 +3719,29 @@ function main(args: string[]): void {
   }
 
   if (command === "status") {
-    if (rest.length > 0) {
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== "--json")) {
       process.stderr.write(`Unknown option for status: ${rest[0]}\n`);
       process.exitCode = 1;
       return;
     }
 
-    printStatus();
+    if (rest[0] === "--json") {
+      printStatusJson();
+    } else {
+      printStatus();
+    }
     return;
   }
 
   if (command === "doctor") {
-    if (rest.length > 0) {
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== "--json")) {
       process.stderr.write(`Unknown option for doctor: ${rest[0]}\n`);
       process.exitCode = 1;
       return;
     }
 
     try {
-      printDoctor();
+      printDoctor({ json: rest[0] === "--json" });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       process.stderr.write(`Doctor failed: ${message}\n`);
