@@ -32,7 +32,11 @@ Do not store secrets in Akephalos memories.
 
 ## Quickstart
 
-Clone the public source repo, install development dependencies, and build the CLI:
+Akephalos is in early `v0.1` prerelease. If you want the shortest safe trial path, see [Try Akephalos in 5 Minutes](docs/TRY_IN_5_MINUTES.md). If the source-checkout path fails, use [Source-Checkout Troubleshooting](docs/SOURCE_CHECKOUT_TROUBLESHOOTING.md) to turn the failure into a useful sanitized report. If you are deciding whether the MVP fits your use case, skim the [Adopter FAQ](docs/ADOPTER_FAQ.md) first. If you prefer to skim expected output first, see the fictional [demo transcript](examples/demo-transcript.md), the tiny [terminal demo SVG](examples/terminal-demo.svg), or the public-safe [starter passport example](examples/starter-passport/README.md). If you are testing MCP clients, start with [MCP Client Config Snippets](docs/MCP_CLIENT_SNIPPETS.md), use the [VS Code MCP Client Notes](docs/VS_CODE_MCP_CLIENT_NOTES.md) for Cursor/Cline/Roo-style clients, the [Cline/Roo MCP Client Notes](docs/CLINE_ROO_MCP_CLIENT_NOTES.md) for a narrower Cline/Roo report, or the [opencode MCP Client Notes](docs/OPENCODE_MCP_CLIENT_NOTES.md) for opencode, then use the [MCP Client Smoke-Test Worksheet](docs/MCP_CLIENT_SMOKE_WORKSHEET.md) to submit a conservative field report. Codex CLI testers can use the [Codex CLI Compatibility Notes](docs/CODEX_CLI_COMPATIBILITY_NOTES.md).
+
+![Akephalos v0.1 terminal demo](examples/terminal-demo.svg)
+
+The best way to try it today is from a source checkout:
 
 ```sh
 git clone https://github.com/sunnja69/akephalos.git
@@ -95,7 +99,7 @@ Start the MCP server:
 node dist/index.js mcp
 ```
 
-For MCP client JSON examples and a smoke-test checklist, see [docs/mcp-client-setup.md](docs/mcp-client-setup.md). A copyable starter config lives at [examples/mcp-client-config.json](examples/mcp-client-config.json).
+For local setup notes, MCP client JSON examples, and safe smoke-test checklists, see [Local MCP Setup Notes](docs/MCP_SETUP.md) and the [MCP client setup guide](docs/mcp-client-setup.md). A copyable starter config lives at [examples/mcp-client-config.json](examples/mcp-client-config.json).
 
 If you add the built CLI to your shell path later, the same commands are available as:
 
@@ -105,6 +109,23 @@ akephalos status
 akephalos scan
 akephalos add-memory "Durable non-secret context."
 ```
+
+## Contributing
+
+Akephalos is deliberately small, so the best contributions are practical field reports and tiny improvements that help another agent/user try the passport safely.
+
+Good first places to help:
+
+- Try the quickstart on Windows, macOS, Linux, or WSL and report what worked or broke. If the source-checkout build or command path fails, start with [Source-Checkout Troubleshooting](docs/SOURCE_CHECKOUT_TROUBLESHOOTING.md) so the report includes the exact command, versions, and sanitized error. Windows testers can start with the unverified [PowerShell smoke-test recipe](docs/WINDOWS_POWERSHELL_SMOKE_TEST.md); macOS, Claude Code, Codex CLI, and OpenClaw/Hermes testers can start with the [Platform and Agent Smoke-Test Recipes](docs/PLATFORM_AGENT_SMOKE_RECIPES.md). If you are not sure what Akephalos can and cannot safely claim yet, read the [Adopter FAQ](docs/ADOPTER_FAQ.md) before filing a report.
+- Test the `.akephalos` bundle with one agent harness such as Claude Code, Codex, Cursor, Hermes/OpenClaw, or another MCP client. For a conservative harness check, use the [Agent Harness Smoke Test](docs/AGENT_HARNESS_SMOKE_TEST.md), the shorter [platform/agent smoke recipes](docs/PLATFORM_AGENT_SMOKE_RECIPES.md), or the copy-paste [Agent Prompt Packs](docs/AGENT_PROMPT_PACKS.md) for local coding agents. Codex CLI testers can use the narrower [Codex CLI Compatibility Notes](docs/CODEX_CLI_COMPATIBILITY_NOTES.md). For Claude Desktop, Cursor, Cline, Roo Code, opencode, or another MCP client, use the [MCP Client Smoke-Test Worksheet](docs/MCP_CLIENT_SMOKE_WORKSHEET.md); Cursor/Cline/Roo testers can start with the narrower [VS Code MCP Client Notes](docs/VS_CODE_MCP_CLIENT_NOTES.md), Cline/Roo testers can use the focused [Cline/Roo MCP Client Notes](docs/CLINE_ROO_MCP_CLIENT_NOTES.md), and opencode testers can start with the [opencode MCP Client Notes](docs/OPENCODE_MCP_CLIENT_NOTES.md). The [Client Status Matrix](docs/CLIENT_STATUS_MATRIX.md) shows what is already verified and where a new field report helps most.
+- Improve examples, screenshots, terminal transcripts, starter passport files, or MCP setup notes using fictional/non-secret data only. Screenshot/GIF contributors should start with the [Screenshot and Demo Capture Guide](docs/SCREENSHOT_AND_DEMO_CAPTURE.md).
+- Share a sanitized compatibility report using the GitHub issue template after trying the local CLI or MCP server.
+- Use the [Compatibility Reports](docs/COMPATIBILITY_REPORTS.md) template if you want a copy-pasteable report format, or skim the [compatibility report examples](examples/compatibility-reports/README.md), including the Hermes-hosted WSL harness report, for public-safe report shapes.
+- Pick an open [`good first issue`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22) or [`help wanted`](https://github.com/sunnja69/akephalos/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22) item.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR, especially the safety rules about not committing real memories, secrets, auth paths, or machine-specific private data.
+
+Not sure where to start? Use the [Contributor Task Picker](docs/CONTRIBUTOR_TASKS.md) to choose a 5-minute OS check, agent/MCP compatibility report, or docs/example improvement. If you are ready to open a tiny PR, use the [First PR Guide](docs/FIRST_PR_GUIDE.md).
 
 ## Bundle Layout
 
@@ -260,4 +281,5 @@ For contributors and testers:
 - [docs/CONTRIBUTING_NOTES.md](docs/CONTRIBUTING_NOTES.md)
 - [docs/KNOWN_WORKING_AGENTS.md](docs/KNOWN_WORKING_AGENTS.md)
 - [examples/demo-passport](examples/demo-passport)
+- [examples/starter-passport](examples/starter-passport/README.md)
 - [examples/quickstart-terminal-transcript.md](examples/quickstart-terminal-transcript.md)
