@@ -99,7 +99,7 @@ Start the MCP server:
 node dist/index.js mcp
 ```
 
-For client config snippets and a safe smoke-test checklist, see [Local MCP Setup Notes](docs/MCP_SETUP.md).
+For local setup notes, MCP client JSON examples, and safe smoke-test checklists, see [Local MCP Setup Notes](docs/MCP_SETUP.md) and the [MCP client setup guide](docs/mcp-client-setup.md). A copyable starter config lives at [examples/mcp-client-config.json](examples/mcp-client-config.json).
 
 If you add the built CLI to your shell path later, the same commands are available as:
 

@@ -190,6 +190,8 @@ Akephalos can run as a local MCP stdio server:
 akephalos mcp
 ```
 
+For copyable client config examples, source-checkout paths, Windows path notes, and a smoke-test checklist, see [mcp-client-setup.md](mcp-client-setup.md).
+
 MCP resources:
 
 - `akephalos://identity`
