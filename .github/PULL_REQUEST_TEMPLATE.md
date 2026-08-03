@@ -1,10 +1,10 @@
 ## What changed
 
-- 
+-
 
 ## Why this helps Akephalos v0.1 adopters/contributors
 
-- 
+-
 
 ## Verification
 

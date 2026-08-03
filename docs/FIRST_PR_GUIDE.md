@@ -80,10 +80,10 @@ If you touch `merge-ledgers`, link [issue #8](https://github.com/sunnja69/akepha
 
 ```md
 ## What changed
-- 
+-
 
 ## Why this helps adopters
-- 
+-
 
 ## Verification
 - [ ] npm test
