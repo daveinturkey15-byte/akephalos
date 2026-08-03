@@ -18,6 +18,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 
 const version = "0.1.0";
+let bundleRootOverride: string | undefined;
 
 const help = `Akephalos ${version}
 
@@ -49,12 +50,14 @@ Print targets:
   identity, rules, tools, projects, memories
 
 Options:
+  --bundle-dir <path>           Use this .akephalos bundle directory instead of the current workspace
   --force                      Overwrite generated files during init
   -h, --help                   Show this help output
   -v, --version                Show the CLI version
 
 Examples:
   akephalos init
+  akephalos --bundle-dir ~/passport/.akephalos status
   akephalos doctor
   akephalos doctor --json
   akephalos scan
@@ -269,8 +272,12 @@ function printHelp(): void {
   process.stdout.write(help);
 }
 
+function setBundleRootOverride(path: string): void {
+  bundleRootOverride = path;
+}
+
 function bundleRoot(): string {
-  return join(process.cwd(), ".akephalos");
+  return bundleRootOverride ?? join(process.cwd(), ".akephalos");
 }
 
 function bundlePath(root: string, file: (typeof bundleFiles)[number]): string {
@@ -3453,7 +3460,7 @@ function printSection(target: PrintTarget): void {
 }
 
 function printInitResult(result: InitResult): void {
-  process.stdout.write("Created .akephalos bundle.\n");
+  process.stdout.write(`Created Akephalos bundle at ${bundleRoot()}.\n`);
 
   if (result.created.length > 0) {
     process.stdout.write(`Created: ${result.created.join(", ")}\n`);
@@ -3464,8 +3471,59 @@ function printInitResult(result: InitResult): void {
   }
 }
 
+type ParsedGlobalOptions = {
+  args: string[];
+  ok: boolean;
+};
+
+function parseGlobalOptions(args: string[]): ParsedGlobalOptions {
+  const remaining = [...args];
+
+  while (remaining.length > 0) {
+    const current = remaining[0];
+
+    if (current === "--bundle-dir") {
+      const value = remaining[1];
+
+      if (!value || value.startsWith("-")) {
+        process.stderr.write("Missing value for --bundle-dir\n");
+        process.exitCode = 1;
+        return { args: [], ok: false };
+      }
+
+      setBundleRootOverride(value);
+      remaining.splice(0, 2);
+      continue;
+    }
+
+    if (current.startsWith("--bundle-dir=")) {
+      const value = current.slice("--bundle-dir=".length);
+
+      if (!value) {
+        process.stderr.write("Missing value for --bundle-dir\n");
+        process.exitCode = 1;
+        return { args: [], ok: false };
+      }
+
+      setBundleRootOverride(value);
+      remaining.shift();
+      continue;
+    }
+
+    break;
+  }
+
+  return { args: remaining, ok: true };
+}
+
 function main(args: string[]): void {
-  const [command, ...rest] = args;
+  const parsed = parseGlobalOptions(args);
+
+  if (!parsed.ok) {
+    return;
+  }
+
+  const [command, ...rest] = parsed.args;
 
   if (!command || command === "help" || command === "--help" || command === "-h") {
     printHelp();

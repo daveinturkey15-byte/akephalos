@@ -332,6 +332,25 @@ test("status --json reports a missing bundle without prose", () => {
   assert.doesNotMatch(result.stdout, /Run `akephalos init`/);
 });
 
+test("global --bundle-dir targets a bundle outside the current workspace", () => {
+  const cwd = tempWorkspace();
+  const other = tempWorkspace();
+  const bundle = join(other, "agent-passport");
+
+  runCli(cwd, ["--bundle-dir", bundle, "init"]);
+  runCli(cwd, ["--bundle-dir", bundle, "add-memory", "portable context"]);
+
+  assert.equal(existsSync(join(cwd, ".akephalos")), false);
+  assert.equal(existsSync(join(bundle, "manifest.json")), true);
+
+  const status = runCli(cwd, ["--bundle-dir", bundle, "status"]);
+  assert.match(status.stdout, new RegExp(`Bundle: found at ${bundle.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}`));
+  assert.match(status.stdout, /Memory count: 1/);
+
+  const printed = runCli(cwd, ["--bundle-dir", bundle, "print", "memories"]);
+  assert.match(printed.stdout, /portable context/);
+});
+
 test("doctor reports healthy bundle checks", () => {
   const cwd = tempWorkspace();
 
